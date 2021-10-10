@@ -1,3 +1,4 @@
+## Synopsis
 Webson is a JSON markup syntax for representing DOM elements, enabling entire web pages to be described without any HTML. It has a number of key features such as variables and repeat blocks, that avoid the repetition found in large HTML scripts.
 
 ## Introduction
