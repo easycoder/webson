@@ -140,7 +140,7 @@ webson.js:263 Style width: "25%" -> 25%
 webson.js:263 Style height: "100%" -> 100%
 webson.js:263 Style background: "green" -> green
 ```
-where `webson` is the Webson rendering engine; a JavaScript file of about 12 kbytes in size.
+where `webson.js` is the Webson rendering engine; a JavaScript file of about 12 kbytes in size.
 
 `#doc` items can be either single lines of text or arrays of lines. They are just there for the benefit of the programmer and have no effect on the screen being constructed.
 
