@@ -1,0 +1,61 @@
+{
+    "width": "50%",
+    "height": "50%",
+    "display": "flex",
+    "flex-direction": "column",
+    "#": [
+        {"#item": "$Top"},
+        {"#item": "$Middle"},
+        {"#item": "$Bottom"}
+    ],
+    
+    "$Top": {
+        "#element": "div",
+        "@id": "top",
+        "height": "20%",
+        "background": "cyan"
+    },
+    
+    "$Middle": {
+        "#element": "div",
+        "width": "100%",
+        "flex": 1,
+        "display": "flex",
+        "flex-direction": "row",
+        "#": [
+            {"#item": "$Left"},
+            {"#item": "$Center"},
+            {"#item": "$Right"}
+        ]
+    },
+    
+    "$Bottom": {
+        "#element": "div",
+        "height": "10%",
+        "background": "magenta"
+    },
+    
+    "$Left": {
+        "#element": "div",
+        "display": "inline-block",
+        "width": "25%",
+        "height": "100%",
+        "background": "green"
+    },
+    
+    "$Center": {
+        "#element": "div",
+        "display": "inline-block",
+        "flex": 1,
+        "height": "100%",
+        "background": "yellow"
+    },
+    
+    "$Right": {
+        "#element": "div",
+        "display": "inline-block",
+        "width": "15%",
+        "height": "100%",
+        "background": "blue"
+    }
+}

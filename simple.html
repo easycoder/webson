@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/easycoder/easycoder.github.io/dist/easycoder.js?v=2.7.6'></script>
+    <script type='text/javascript' src='webson.js?v=2109211100'></script>
+  </head>
+
+  <body>
+    <div style="width:50%;height:50%;display:flex;flex-direction:column">
+        <div id="top" style="height:20%;background:cyan">
+        </div>
+        <div style="width:100%;flex:1;display:flex;flex-direction:row">
+            <div id="left" style="display:inline-block;width:25%;height:100%;background:green">
+            </div>
+            <div id="center" style="display:inline-block;height:100%;background:yellow;flex:1">
+            </div>
+            <div id="right" style="display:inline-block;width:15%;height:100%;background:blue">
+            </div>
+        </div>
+        <div id="bottom" style="height:10%;background:magenta">
+        </div>
+    </div>
+
+    <pre id="easycoder-script" style="display:none">
+
+      script Boot
+      require js `resources/plugins/dom.js?v=` cat now
+      variable Script
+      rest get Script from `/resources/ecs/simple.ecs?v=` cat now
+      run Script
+
+    </pre>
+
+  </body>
+</html>

@@ -1,0 +1,86 @@
+{
+    "#debug": 2,
+    "#doc": "A simple example for JSON-DOM",
+    "width": "50%",
+    "height": "50%",
+    "display": "flex",
+    "flex-direction": "column",
+    "#": [
+        {"#item": "$Top"},
+        {"#item": "$Middle"},
+        {"#item": "$Bottom"}
+    ],
+    
+    "$Top": {
+        "#doc": "The header bar",
+        "#element": "div",
+        "@id": "top",
+        "height": "20%",
+        "background": "cyan"
+    },
+    
+    "$Middle": {
+        "#doc": "The main centre panel",
+        "#element": "div",
+        "width": "100%",
+        "flex": 1,
+        "display": "flex",
+        "flex-direction": "row",
+        "#": [
+            {"#item": "$Left"},
+            {"#item": "$Center"},
+            {"#item": "$Right"}
+        ]
+    },
+    
+    "$Bottom": {
+        "#doc": "The footer bar",
+        "#element": "div",
+        "@id": "bottom",
+        "height": "10%",
+        "background": "magenta"
+    },
+    
+    "$Left": {
+        "#doc": "The left column",
+        "$id": "left",
+        "$width": "25%",
+        "$color": "green",
+        "#": {"#item": "$LRPanel"}
+    },
+    
+    "$Center": {
+        "#doc": "The center column",
+        "#element": "div",
+        "@id": "center",
+        "display": "inline-block",
+        "flex": 1,
+        "height": "100%",
+        "background": "yellow"
+    },
+    
+    "$Right": {
+        "#doc": "The right column",
+        "$id": "right",
+        "$width": "15%",
+        "$color": "blue",
+        "#": {"#item": "$LRPanel"}
+    },
+    
+    "$LRPanel": {
+        "#element": "div",
+        "@id": "$id",
+        "display": "inline-block",
+        "width": "calc($width - 2em)",
+        "height": "calc(100% - 2em)",
+        "padding": "1em",
+        "#": {"#item": "$LRSubPanel"}
+    },
+    
+    "$LRSubPanel": {
+        "#element": "div",
+        "width": "100%",
+        "height": "100%",
+        "background": "$color"
+    }
+}

@@ -1,0 +1,28 @@
+!	Draw
+
+	script Test
+    
+    div Body
+    div Main
+    dom DOM
+    variable Mobile
+    variable Script
+    
+    clear Mobile
+    if mobile
+        if portrait set Mobile
+!   set Mobile
+    create Body
+    clear Body
+    
+    create Main in Body
+    if Mobile
+        set the style of Main to `position:relative`
+    else
+        set the style of Main to `width:640px;border:1px solid black;position:relative`
+    
+    rest get Script from `/resources/json/qwerty.json?v=` cat now
+    
+    render DOM in Main from Script
+    
+    stop

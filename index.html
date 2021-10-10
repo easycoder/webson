@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/easycoder/easycoder.github.io/dist/easycoder.js?v=2.7.6'></script>
+    <script type='text/javascript' src='webson.js?v=2109211100'></script>
+  </head>
+
+  <body>
+
+    <pre id="easycoder-script" style="display:none">
+
+      script Boot
+      require js `resources/plugins/dom.js?v=` cat now
+      variable Script
+      rest get Script from `/resources/ecs/qwerty.ecs?v=` cat now
+      run Script
+
+    </pre>
+
+  </body>
+</html>
