@@ -1,6 +1,8 @@
 ## Synopsis
 Webson is a JSON markup syntax for representing DOM elements, enabling entire web pages to be described without any HTML. It has a number of key features such as variables and repeat blocks, that avoid the repetition found in large HTML scripts.
 
+This page is a copy of an article written for dev.to.
+
 ## Introduction
 A web page is the visual representation of a Document Object Model, or DOM, the data structure understood by all browsers. In the past the DOM was constructed by the browser from HTML on the page and CSS supplied from the server, but more recently it has become increasingly common for JavaScript to create the DOM itself, with no HTML ever being seen. While this suits programmers well it requires a particular skill set that is not always held by those building pages the traditional way.
 
@@ -196,6 +198,6 @@ Here I've left out the block for `$Center` as it's unchanged. Both `$Left` and `
 `$LRPanel` creates a `div`, applies padding to it and creates an inner `div` called `$LRSubPanel`. Note how the `$color` variable is passed down and used here, resulting in a white border. Note also the use of `calc()` in `$LRPanel` to allow for the padding, which in a conformant browser adds to the height of the element. This also neatly introduces another feature of Webson; the ability to put user variables into expressions.
 
 ## From here on in
-This has been a brief introduction to Webson. To cover every feature in detail would result in a very lengthy article. A more in-depth treatment, with examples, can be found at ????. The source code is freely available for use from ??? and comments are welcome on how to improve it. To finish up, here's a screenshot of one of the more complex layouts described in those pages:
+This has been a brief introduction to Webson. To cover every feature in detail would result in a very lengthy article. A more in-depth treatment, with examples, can be found [here](https://webson.netlify.app). The source code is freely available for use from [the Webson repository](https://github.com/easycoder/webson) and comments are welcome on how to improve it. To finish up, here's a screenshot of one of the more complex layouts described in those pages:
 
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8mgg7zmh0maie1jg64aw.png)
