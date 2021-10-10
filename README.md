@@ -19,6 +19,7 @@ This article introduces a proposed syntax that allows JSON to be used to describ
 ## Getting started
 Let's start with a simple example; a layout commonly found in magazine and social media web pages. At the top there's a full-width header; under this a central panel with 2 sidebars and at the bottom a footer. As this is only an example, each of the component `div`s has its own background color so it stands out clearly. It looks like this:
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lpj2kpnatrqxeavwk0tn.png)
+
 Here's the HTML that will create this screen. It uses inline styles to avoid the need to present a separate CSS file:
 ```html
     <div style="width:50%;height:50%;display:flex;flex-direction:column">
@@ -149,6 +150,7 @@ As with CSS, Webson implements a _cascade_, whereby items declared at one level 
 
 For example, let's suppose the two sidebars share a common feature; they each have an inner `div` and padding to produce a border. Here's what it should look like:
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/40rop60gtl0ool33fme4.png)
+
 To achieve this we can rewrite the last part of the script as follows:
 ```
     "$Left": {
