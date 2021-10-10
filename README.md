@@ -178,7 +178,6 @@ To achieve this we can rewrite the last part of the script as follows:
     
     "$LRPanel": {
         "#element": "div",
-        "@id": "$id",
         "display": "inline-block",
         "width": "calc($width - 2em)",
         "height": "calc(100% - 2em)",
@@ -188,6 +187,7 @@ To achieve this we can rewrite the last part of the script as follows:
     
     "$LRSubPanel": {
         "#element": "div",
+        "@id": "$id",
         "width": "100%",
         "height": "100%",
         "background": "$color"
@@ -195,7 +195,7 @@ To achieve this we can rewrite the last part of the script as follows:
 ```
 Here I've left out the block for `$Center` as it's unchanged. Both `$Left` and `$Right` now no longer declare their own `#element`; instead they set up user-defined variables `$id`, `$width` and `$color` and invoke `$LRPanel` to construct the element. Any variable declared or modified at a given level in the structure will be visible at all points beneath that one, but changes do not propagate upwards.
 
-`$LRPanel` creates a `div`, applies padding to it and creates an inner `div` called `$LRSubPanel`. Note how the `$color` variable is passed down and used here, resulting in a white border. Note also the use of `calc()` in `$LRPanel` to allow for the padding, which in a conformant browser adds to the height of the element. This also neatly introduces another feature of Webson; the ability to put user variables into expressions.
+`$LRPanel` creates a `div`, applies padding to it and creates an inner `div` called `$LRSubPanel`. Note how the `$color` variable is passed down and used here, resulting in a white border. Note also the use of `calc()` in `$LRPanel` to allow for the padding, which in a conformant browser adds to the height of the element. This also neatly introduces another powerful feature of Webson; the ability to put user variables into expressions.
 
 ## From here on in
 This has been a brief introduction to Webson. To cover every feature in detail would result in a very lengthy article. A more in-depth treatment, with examples, can be found [here](https://webson.netlify.app). The source code is freely available for use from [the Webson repository](https://github.com/easycoder/webson) and comments are welcome on how to improve it. To finish up, here's a screenshot of one of the more complex layouts described in those pages:
