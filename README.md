@@ -18,6 +18,7 @@ This article introduces a proposed syntax that allows JSON to be used to describ
 
 ## Getting started
 Let's start with a simple example; a layout commonly found in magazine and social media web pages. At the top there's a full-width header; under this a central panel with 2 sidebars and at the bottom a footer. As this is only an example, each of the component `div`s has its own background color so it stands out clearly. It looks like this:
+
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lpj2kpnatrqxeavwk0tn.png)
 
 Here's the HTML that will create this screen. It uses inline styles to avoid the need to present a separate CSS file:
@@ -149,6 +150,7 @@ A `#debug` directive affects its own block and those below it (defined using `@`
 As with CSS, Webson implements a _cascade_, whereby items declared at one level apply to all those in lower (contained) levels. Changing a value at one level only affects those at that level and beneath it; those above are unaffected.
 
 For example, let's suppose the two sidebars share a common feature; they each have an inner `div` and padding to produce a border. Here's what it should look like:
+
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/40rop60gtl0ool33fme4.png)
 
 To achieve this we can rewrite the last part of the script as follows:
@@ -192,4 +194,5 @@ Here I've left out the block for `$Center` as it's unchanged. Both `$Left` and `
 
 ## From here on in
 This has been a brief introduction to Webson. To cover every feature in detail would result in a very lengthy article. A more in-depth treatment, with examples, can be found at ????. The source code is freely available for use from ??? and comments are welcome on how to improve it. To finish up, here's a screenshot of one of the more complex layouts described in those pages:
+
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8mgg7zmh0maie1jg64aw.png)
