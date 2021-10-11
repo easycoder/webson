@@ -1,5 +1,5 @@
 ## Synopsis
-Webson is a JSON markup syntax for representing DOM elements, enabling entire web pages to be described without any HTML, and a JavaScript runtime engine to build pages inthe browser. It has a number of key features such as variables and repeat blocks, that avoid the repetition found in large HTML scripts.
+Webson is a JSON markup syntax for representing DOM elements, enabling entire web pages to be described without any HTML, and a JavaScript runtime engine to build pages in the browser. It has a number of key features such as variables and repeat blocks, that avoid the repetition found in large HTML scripts.
 
 This page is a modified version of an article written for dev.to.
 
@@ -43,9 +43,11 @@ Here's the HTML that will create this screen. It uses inline styles to avoid the
         </div>
     </div>
 ```
-This is a total of 655 characters. The Webson script to create this is 1172 characters, nearly twice as many, and occupies 61 lines rather than 14. The reason for the extra characters is partly that every item is named and partly because JSON itself is fairly bulky (lots of double-quotes), while the increase in lines is mainly because it's a lot more spaced out. High information density makes code hard to read at a glance as the eye has to pick out specific details from a dense surrounding mass. With Webson, the CSS properties are separated out, one per line, rather than all being crammed onto a single line. This could of course be done with HTML too, but because there's no agreed way to present it the result is usually an unstructured mess, so it's usual to put everything on the same line.
+This is a total of 655 characters. The corresponding Webson script to create the same screen is 1172 characters, nearly twice as many, and occupies 61 lines rather than 14, but before you dismiss Webson as being too wordy I must say this is a very basic example that doesn't make use of any of the more advanced features of the system. More complex scripts can be smaller than their HTML equivalents.
 
-Here's the script. Before you dismiss Webson as being too wordy, I must say this is a very basic example that doesn't reveal any of the more advanced features of the system. I'll get on to some of these shortly.
+The reason for the extra size is partly that every item is named and partly because JSON itself is fairly bulky (lots of double-quotes), while the increase in lines is mainly because it's a lot more spaced out. High information density makes code hard to read at a glance as the eye has to pick out specific details from a dense surrounding mass. With Webson, the CSS properties are separated out, one per line, rather than all being crammed onto a single line. This could of course be done with HTML too, but because there's no agreed way to present it the result is usually an unstructured mess, so it's usual to put everything on the same line.
+
+Here's the script. I'll get on to some of the advanced features shortly.
 ```json
 {
     "width": "50%",

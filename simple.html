@@ -3,7 +3,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/easycoder/easycoder.github.io/dist/easycoder.js?v=2.7.6'></script>
     <script type='text/javascript' src='webson.js?v=2109211100'></script>
   </head>
 
@@ -23,15 +22,21 @@
         </div>
     </div>
 
-    <pre id="easycoder-script" style="display:none">
+    <script>
 
-      script Boot
-      require js `resources/plugins/dom.js?v=` cat now
-      variable Script
-      rest get Script from `/resources/ecs/simple.ecs?v=` cat now
-      run Script
+        fetch(`resources/json/simple.json`)
+            .then(response => response.text())
+            .then((script) => {
+                let parent = document.body;
+                parent.innerHTML = null;
+                element = document.createElement(`div`);
+                element.style.width = `640px`;
+                element.style.height = `480px`;
+                Webson.render(element, `simple`, script);
+                parent.appendChild(element);
+            });
 
-    </pre>
+    </script>
 
   </body>
 </html>

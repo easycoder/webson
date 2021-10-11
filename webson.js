@@ -131,6 +131,22 @@ const Webson = {
         }
     },
     
+    // Include another script
+    include: (parent, name, path, symbols) => {
+        if (symbols[`#debug`] >= 2) {
+            console.log(`#include ${name}: ${path}`);
+        };
+        fetch(path)
+            .then(response => response.text())
+            .then((script) => {
+                element = document.createElement(`div`);
+                element.style.width = `640px`;
+                element.style.height = `480px`;
+                Webson.build(parent, name, JSON.parse(script), symbols);
+                parent.appendChild(element);
+            });
+    },
+    
     // Build a DOM structure
     build: (parent, name, items, parentSymbols) => {
         if (typeof parent === `undefined`) {
@@ -194,9 +210,6 @@ const Webson = {
                 case `#element`:
                 case `#calc`:
                     break;
-                case `#id`:
-                    element.id = Webson.expand(element, value, symbols);
-                    break;
                 case `#content`:
                     const val = Webson.expand(element, value, symbols);
                     if (symbols[`#debug`] >= 2) {
@@ -251,11 +264,30 @@ const Webson = {
                             element, `${name}[${step}]`, symbols[symbols[`#target`]], symbols);
                     }
                     break;
+                case `#include`:
+                    if (Array.isArray(value)) {
+                        for (item of value) {
+                            const defs = Object.keys(item);
+                            const name = defs[0];
+                            const path = item[name];
+                            Webson.include(element, name, path, symbols);
+                        }
+                    } else if (typeof value === `object`) {
+                            const defs = Object.keys(value);
+                            const name = defs[0];
+                            const path = value[name];
+                        Webson.include(element, name, path, symbols);
+                    }
+                    break;
                 default:
                     if (key[0] === `@`) {
-                        const attributeName = key.substring(1);
-                        const attributeValue = Webson.expand(parent, value, symbols);
-                        element.setAttribute(attributeName, attributeValue);
+                        const aName = key.substring(1);
+                        const aValue = Webson.expand(parent, value, symbols);
+                        element.setAttribute(aName, aValue);
+                        if (symbols[`#debug`] >= 2) {
+                            console.log(
+                                `Attribute ${aName}: ${JSON.stringify(value,0,0)} -> ${aValue}`);
+                        }
                     } else if (key[0] !== `$`) {
                         const val = Webson.expand(element, value, symbols);
                         element.style[key] = val;
@@ -283,8 +315,8 @@ const Webson = {
     }, 
     
     // Render a script into a given container
-    render: (parent, script) => {
-        Webson.build(parent, "main", JSON.parse(script), {
+    render: (parent, name, script) => {
+        Webson.build(parent, name, JSON.parse(script), {
             "#debug": 0
         });
     }
