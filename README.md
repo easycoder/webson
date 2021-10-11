@@ -131,19 +131,19 @@ Here we have another new symbol, `@`, which (appropriately) signifies an _attrib
 
 Another feature above reveals a built-in debugging capability. When hand-building HTML, errors are common, often resulting in strange layout that are not at all as intended. Webson allows you to specify 3 different debug levels:
 
-`"#debug": 0` - no debugging output
-`"#debug": 1` - Show all `#doc` properties
-`"#debug": 2` - Show every item
+`"#debug": 0` - no debugging output    
+`"#debug": 1` - Show all `#doc` properties    
+`"#debug": 2` - Show every item    
 
 which enables you to see clearly what is happening. The output for the above is
 ```
 Build $Left
-webson.js:155 The left column
-webson.js:166 #element: div
-webson.js:263 Style display: "inline-block" -> inline-block
-webson.js:263 Style width: "25%" -> 25%
-webson.js:263 Style height: "100%" -> 100%
-webson.js:263 Style background: "green" -> green
+The left column
+#element: div
+Style display: "inline-block" -> inline-block
+Style width: "25%" -> 25%
+Style height: "100%" -> 100%
+Style background: "green" -> green
 ```
 where `webson.js` is the Webson rendering engine; a JavaScript file of about 12 kbytes in size.
 
