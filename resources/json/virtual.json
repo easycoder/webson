@@ -1,0 +1,49 @@
+{
+    "#debug": 2,
+    "#doc": "The parent container supplied from outside Webson",
+    "padding": "<#element_width/50>px",
+    "#": {"#item": "$Container"},
+    
+    "$Container": {
+        "#doc": "The inner container",
+        "#element": "div",
+        "#calc": [
+            {"$Keys": 10},
+            {"$Gaps": "$Keys+2"},
+            {"$Units": "$Keys+$Gaps/10"},
+            {"$ButtonSize": "#parent_width/$Units"},
+            {"$ButtonRadius": "$ButtonSize/5"},
+            {"$Gap": "$ButtonSize/10"},
+            {"$NRows": 5}
+        ],
+        "#": {"#item": "$Rows"}
+    },
+    
+    "$Rows": {
+        "#doc": "The row holder",
+        "#element": "div",
+        "@id": "rowHolder",
+        "width": "100%",
+        "height": "<$ButtonSize*$NRows+$Gap*$NRows+$Gap*2>px",
+        "background": "#444",
+        "text-align": "center",
+        "#": [
+            {"#item": "$Row0"}
+        ]
+    },
+    
+    "$Row0": {
+        "#doc": "Row 0 of the keyboard",
+        "#element": "div",
+        "@id": "row0",
+        "width": "100%",
+        "height": "<$ButtonSize+$Gap*2>px",
+        "$row": 0,
+        "$RowLabels": [
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
+        ],
+        "$hrefs": [
+            "r0c0", "r0c1", "r0c2", "r0c3", "r0c4", "r0c5", "r0c6", "r0c7", "r0oc8", "r0c9"
+        ]
+    }
+}

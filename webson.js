@@ -37,13 +37,13 @@ const Webson = {
                             // Evaluate system values
                             switch (item) {
                                 case `#element_width`:
-                                    output = output.replace(item, element.clientWidth);
+                                    output = output.replace(item, element.offsetWidth);
                                     mod = true;
                                     changed = true;
                                     break;
                                 case `#parent_width`:
                                     output = output.replace(
-                                        item, element.parentElement.clientWidth);
+                                        item, element.parentElement.offsetWidth);
                                     mod = true;
                                     changed = true;
                                     break;

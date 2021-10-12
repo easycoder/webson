@@ -1,8 +1,6 @@
 ## Synopsis
 Webson is a JSON markup syntax for representing DOM elements, enabling entire web pages to be described without any HTML, and a JavaScript runtime engine to build pages in the browser. It has a number of key features such as variables and repeat blocks, that avoid the repetition found in large HTML scripts.
 
-This page is a modified version of an article written for dev.to.
-
 ## Introduction
 A web page is the visual representation of a Document Object Model, or DOM, the data structure understood by all browsers. In the past the DOM was constructed by the browser from HTML on the page and CSS supplied from the server, but more recently it has become increasingly common for JavaScript to create the DOM itself, with no HTML ever being seen. While this suits programmers well it requires a particular skill set that is not always held by those building pages the traditional way.
 
@@ -22,7 +20,7 @@ This article introduces a proposed syntax that allows JSON to be used to describ
 > _I should perhaps note that this project started as a post-retirement coding exercise to keep the brain cells ticking over, without any specific aim in mind. Whether it has any real value I cannot say, but some may find it a useful building block._
 
 ## Getting started
-Let's start with a simple example; a layout commonly found in magazine and social media web pages. At the top there's a full-width header; under this a central panel with 2 sidebars and at the bottom a footer. As this is only an example, each of the component `div`s has its own background color so it stands out clearly. It looks like this:
+Let's start with a simple example; a layout commonly found in online magazines and social media. At the top there's a full-width header; under this a central panel with 2 sidebars and at the bottom a footer. As this is only an example, each of the component `div`s has its own background color so it stands out clearly. It looks like this:
 
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lpj2kpnatrqxeavwk0tn.png)
 
@@ -147,7 +145,7 @@ Style width: "25%" -> 25%
 Style height: "100%" -> 100%
 Style background: "green" -> green
 ```
-where `webson.js` is the Webson rendering engine; a JavaScript file of about 12 kbytes in size.
+where `webson.js` is the Webson rendering engine; a JavaScript file of about 13 kbytes in size.
 
 `#doc` items can be either single lines of text or arrays of lines. They are just there for the benefit of the programmer and have no effect on the screen being constructed.
 
@@ -161,7 +159,7 @@ For example, let's suppose the two sidebars share a common feature; they each ha
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/40rop60gtl0ool33fme4.png)
 
 To achieve this we can rewrite the last part of the script as follows:
-```
+```json
     "$Left": {
         "#doc": "The left column",
         "$id": "left",
@@ -197,9 +195,39 @@ To achieve this we can rewrite the last part of the script as follows:
 ```
 Here I've left out the block for `$Center` as it's unchanged. Both `$Left` and `$Right` now no longer declare their own `#element`; instead they set up user-defined variables `$id`, `$width` and `$color` and invoke `$LRPanel` to construct the element. Any variable declared or modified at a given level in the structure will be visible at all points beneath that one, but changes do not propagate upwards.
 
-`$LRPanel` creates a `div`, applies padding to it and creates an inner `div` called `$LRSubPanel`. Note how the `$color` variable is passed down and used here, resulting in a white border. Note also the use of `calc()` in `$LRPanel` to allow for the padding, which in a conformant browser adds to the height of the element. This also neatly introduces another powerful feature of Webson; the ability to put user variables into expressions.
+`$LRPanel` creates a `div`, applies padding to it and creates an inner `div` called `$LRSubPanel`. Note how the `$color` variable is passed down and used here, resulting in a colored panel with a white border. Note also the use of `calc()` in `$LRPanel` to allow for the padding, which in a conformant browser adds to the height of the element. This also neatly introduces another powerful feature of Webson; the ability to put user variables into expressions.
+
+## The HTML
+To view this demo on a PC, use the following HTML file:
+```html
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webson demo</title>
+    <script type='text/javascript' src='https://webson.netlify.app/webson.js'></script>
+  </head>
+
+  <body>
+    <script>
+        const element = document.createElement(`div`);
+        element.style.width = `640px`;
+        element.style.height = `480px`;
+        render(`resources/json/simple.json`);
+        
+        async function render(file) {
+            const response = await fetch(file);
+            const script = await response.text();
+            Webson.render(element, `simple`, script);
+            document.body.appendChild(element);
+        }
+    </script>
+  </body>
+</html>
+```
+For mobile, the width and height can both be set to `100%`. The JSON script is assumed to be in a folder on your server at `(your domain)/resources/json/simple.json`.
 
 ## From here on in
-This has been a brief introduction to Webson. To cover every feature in detail would result in a very lengthy article. A more in-depth treatment, with examples, can be found [here](https://webson.netlify.app). The source code is freely available for use from [the Webson repository](https://github.com/easycoder/webson) and comments are welcome on how to improve it. To finish up, here's a screenshot of one of the more complex layouts described in those pages:
+This has been a brief introduction to Webson, as to cover every feature in detail would result in a very lengthy article. A more in-depth treatment, with examples, can be found [here](https://webson.netlify.app). The source code is freely available for use from [the Webson repository](https://github.com/easycoder/webson) and comments are welcome on how to improve it. To finish up, here's a screenshot of one of the more complex layouts described in those pages:
 
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8mgg7zmh0maie1jg64aw.png)

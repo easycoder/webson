@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webson demo</title>
-    <script type='text/javascript' src='https://webson.netlify.app/webson.js'></script>
+    <script type='text/javascript' src='webson.js?v=1'></script>
   </head>
 
   <body>
@@ -11,15 +11,14 @@
         window.onload = function() {
             const element = document.createElement(`div`);
             element.style.width = `640px`;
-            element.style.height = `480px`;
             document.body.appendChild(element);
-            render(element, `resources/json/simple.json`);
+            render(element, `resources/json/virtual.json`);
         };
         
         async function render(element, file) {
             const response = await fetch(file);
             const script = await response.text();
-            Webson.render(element, `simple`, script);
+            Webson.render(element, `virtual`, script);
         }
     </script>
   </body>
