@@ -288,7 +288,13 @@ const Webson = {
                             console.log(
                                 `Attribute ${aName}: ${JSON.stringify(value,0,0)} -> ${aValue}`);
                         }
-                    } else if (key[0] !== `$`) {
+                    } else if (key[0] === `$`) {
+                        const val = Webson.expand(element, value, symbols);
+                        symbols[key] = val;
+                        if (symbols[`#debug`] >= 2) {
+                            console.log(`Variable ${key}: ${JSON.stringify(value,0,0)} -> ${val}`);
+                        }
+                    } else {
                         const val = Webson.expand(element, value, symbols);
                         element.style[key] = val;
                         if (symbols[`#debug`] >= 2) {
