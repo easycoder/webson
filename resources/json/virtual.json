@@ -1,34 +1,38 @@
 {
-    "#debug": 2,
     "#doc": "The parent container supplied from outside Webson",
-    "padding": "<#element_width/50>px",
     "#": {"#item": "$Container"},
     
     "$Container": {
+        "#debug": 2,
         "#doc": "The inner container",
         "#element": "div",
         "#calc": [
-            {"$Keys": 10},
-            {"$Gaps": "$Keys+2"},
-            {"$Units": "$Keys+$Gaps/10"},
-            {"$ButtonSize": "#parent_width/$Units"},
+            {"$NKeys": 10},
+            {"$NRows": 5},
+            {"$A": "$NKeys*2"},
+            {"$B": "$A/20"},
+            {"$C": "$NKeys+$B*2"},
+            {"$ButtonSize": "#parent_width/$C"},
             {"$ButtonRadius": "$ButtonSize/5"},
-            {"$Gap": "$ButtonSize/10"},
-            {"$NRows": 5}
+            {"$Gap": "$ButtonSize/20"}
         ],
+        "padding": "<#parent_width/50>px",
+        "background": "#444",
         "#": {"#item": "$Rows"}
     },
     
     "$Rows": {
+        "#debug": 0,
         "#doc": "The row holder",
         "#element": "div",
         "@id": "rowHolder",
         "width": "100%",
         "height": "<$ButtonSize*$NRows+$Gap*$NRows+$Gap*2>px",
-        "background": "#444",
         "text-align": "center",
         "#": [
-            {"#item": "$Row0"}
+            {"#item": "$Row0"},
+            {"#item": "$Row1"},
+            {"#item": "$Row2"}
         ]
     },
     
@@ -40,10 +44,134 @@
         "height": "<$ButtonSize+$Gap*2>px",
         "$row": 0,
         "$RowLabels": [
-            "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
+            "q", "w", "e", "r", "t", "y", "u", "i", "o", "p"
         ],
-        "$hrefs": [
-            "r0c0", "r0c1", "r0c2", "r0c3", "r0c4", "r0c5", "r0c6", "r0c7", "r0oc8", "r0c9"
+        "#": {"#item": "$Buttons"}
+    },
+    
+    "$Row1": {
+        "#doc": "Row 1 of the keyboard",
+        "#element": "div",
+        "@id": "row1",
+        "width": "100%",
+        "height": "<$ButtonSize+$Gap*2>px",
+        "$row": 1,
+        "$RowLabels": [
+            "a", "s", "d", "f", "g", "h", "j", "k", "l"
+        ],
+        "#": {"#item": "$Buttons"}
+    },
+    
+    "$Row2": {
+        "#doc": "Row 2 of the keyboard",
+        "#element": "div",
+        "@id": "row2",
+        "width": "100%",
+        "height": "<$ButtonSize+$Gap*2>px",
+        "$row": 2,
+        "$RowLabels": [
+            "z", "x", "c", "v", "b", "n", "m"
+        ],
+        "#": [
+            {"#item": "$Shift"},
+            {"#item": "$Buttons"},
+            {"#item": "$Backspace"}
         ]
+    },
+    
+    "$Buttons": {
+        "#repeat": {
+            "#doc": "This repeats a row of keys",
+            "#target": "$StandardButton",
+            "#steps": {
+                "#arraysize": "$RowLabels"
+            }
+        }
+    },
+    
+    "$Shift": {
+        "#debug": 2,
+        "#doc": "This is the Shift key",
+        "$ID": "Shift",
+        "$width": "<$ButtonSize*1.6>",
+        "$Content": "Shift",
+        "$href": "shift",
+        "$FontSize": "<$ButtonSize*0.4>",
+        "#": {
+            "#item": "$Button"
+        }
+    },
+    
+    "$Backspace": {
+        "#doc": "This is the Backspace key",
+        "$ID": "Bksp",
+        "$width": "<$ButtonSize*1.6>",
+        "$Content": "Bksp",
+        "$href": "bksp",
+        "$FontSize": "<$ButtonSize*0.4>",
+        "#": {
+            "#item": "$Button"
+        }
+    },
+    
+    "$StandardButton": {
+        "#debug": 0,
+        "#doc": "This is a standard key",
+        "$ID": "r<$row>-$Content",
+        "$width": "$ButtonSize",
+        "$Content": {
+            "#select": "$RowLabels",
+            "#index": "#step"
+        },
+        "$FontSize": "<$ButtonSize*0.5>",
+        "#": {
+            "#item": "$Button"
+        }
+    },
+    
+    "$Button": {
+        "#doc": "This is the outer container for a button",
+        "#element": "div",
+        "@id": "$ID",
+        "position": "relative",
+        "display": "inline-block",
+        "width": "<$width>px",
+        "height": "<$ButtonSize>px",
+        "margin": "<$Gap>px",
+        "border-radius": "$ButtonRadius",
+        "#": {
+            "#item": "$ButtonInner"
+        }
+    },
+    
+    "$ButtonInner": {
+        "#doc": "This is the button inner container",
+        "#element": "div",
+        "position": "relative",
+        "width": "90%",
+        "height": "90%",
+        "top": "10%",
+        "border-radius": "<$ButtonRadius>px",
+        "background": "#888",
+        "#": {
+            "#item": "$ButtonFace"
+        }
+    },
+    
+    "$ButtonFace": {
+        "#doc": "This is the actual button face",
+        "#element": "a",
+        "@id": "a$ID",
+        "display": "block",
+        "position": "absolute",
+        "width": "100%",
+        "top": "<$ButtonSize*0.7-$FontSize>px",
+        "color": "white",
+        "font-family": "mono",
+        "font-size": "<$FontSize>px",
+        "font-weight": "bold",
+        "text-decoration": "none",
+        "@href": "https://test.com?key=$Content",
+        "#content": "$Content"
     }
 }
