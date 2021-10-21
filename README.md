@@ -225,7 +225,4 @@ To view this demo on a PC, use the following HTML file:
 ```
 For mobile, the width and height can both be set to `100%`. The JSON script is assumed to be in a folder on your server at `(your domain)/resources/json/simple.json`. The code above uses the relatively-new standard function `fetch()` to get the named script from a file on the server. It then calls `render()` in the Webson package to create the DOM tree that corresponds to the JSON script.
 
-## From here on in
-This has been a brief introduction to Webson, as to cover every feature in detail would result in a very lengthy article. A more in-depth treatment, with examples, can be found [here](https://webson.netlify.app). The source code is freely available for use from [the Webson repository](https://github.com/easycoder/webson) and comments are welcome on how to improve it. To finish up, here's a screenshot of one of the more complex layouts described in those pages:
-
-![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8mgg7zmh0maie1jg64aw.png)
+[Next: A more complex example](keyboard.md)

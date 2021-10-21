@@ -241,7 +241,7 @@
         "width": "100%",
         "top": "<$ButtonSize*0.7-$FontSize>px",
         "color": "white",
-        "font-family": "mono",
+        "font-family": "Arial, Helvetica, sans-serif",
         "font-size": "<$FontSize>px",
         "font-weight": "bold",
         "text-decoration": "none",
