@@ -127,7 +127,7 @@ The structure we've built here isn't much use unless we can add further items to
         "background": "green"
     },
 ```
-Here we have another new symbol, `@`, which (appropriately) signifies an _attribute_. Various HTML elements require special attributes such as `@type`, `@href`, `@src`, etc.
+Here we have another new symbol, `@`, which (appropriately) signifies an _attribute_. Various HTML elements require special attributes such as `@id`, `@class`, `@type`, `@href`, `@src`, etc. In each case the name is that of the HTML attribute prefixed by `@`.
 
 Another feature above reveals a built-in debugging capability. When hand-building HTML, errors are common, often resulting in strange layout that are not at all as intended. Webson allows you to specify 3 different debug levels:
 
@@ -145,7 +145,7 @@ Style width: "25%" -> 25%
 Style height: "100%" -> 100%
 Style background: "green" -> green
 ```
-where `webson.js` is the Webson rendering engine; a JavaScript file of about 13 kbytes in size.
+This is a simple example where all values are constants. The values appear to be repeated but this will not always be the case. In more complex scripts you will often see the results of expressions being evaluated.
 
 `#doc` items can be either single lines of text or arrays of lines. They are just there for the benefit of the programmer and have no effect on the screen being constructed.
 

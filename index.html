@@ -2,22 +2,24 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/easycoder/easycoder.github.io/dist/easycoder.js?v=2.7.6'></script>
-    <script type='text/javascript' src='webson.js?v=2109211100'></script>
+    <title>Webson demo</title>
+    <script type='text/javascript' src='webson.js?v=1'></script>
   </head>
 
   <body>
-
-    <pre id="easycoder-script" style="display:none">
-
-      script Boot
-      require js `resources/plugins/dom.js?v=` cat now
-      variable Script
-      rest get Script from `/resources/ecs/qwerty.ecs?v=` cat now
-      run Script
-
-    </pre>
-
+    <script>
+        window.onload = function() {
+            const element = document.createElement(`div`);
+            element.style.width = `640px`;
+            document.body.appendChild(element);
+            render(element, `resources/json/virtual.json`);
+        };
+        
+        async function render(element, file) {
+            const response = await fetch(file);
+            const script = await response.text();
+            Webson.render(element, `virtual`, script);
+        }
+    </script>
   </body>
 </html>
