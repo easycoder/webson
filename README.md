@@ -15,7 +15,7 @@ _How about conditional structures?_
 
 which would greatly reduce the amount of markup needed to describe a complex web page, where items are commonly repeated with only minor differences.
 
-This article introduces a proposed syntax that allows JSON to be used to describe a DOM, and a JavaScript rendering engine to process scripts at runtime. The system is immediately usable by HTML/CSS coders and no JavaScript experience is required.
+This article introduces _Webson_, a proposed markup syntax that allows JSON to be used to describe a DOM, and provides a JavaScript rendering engine that can be embedded in any web page to process scripts at runtime. The system is immediately usable by HTML/CSS coders and no JavaScript experience is required. It's aimed at simplifying the design and implementation of highly complex layouts, where precise positioning of large numbers of elements is hard to achieve manually, and it achieves this with markup rather than with code.
 
 > _I should perhaps note that this project started as a post-retirement coding exercise to keep the brain cells ticking over, without any specific aim in mind. Whether it has any real value I cannot say, but some may find it a useful building block._
 
@@ -41,9 +41,9 @@ Here's the HTML that will create this screen. It uses inline styles to avoid the
         </div>
     </div>
 ```
-This is a total of 655 characters. The corresponding Webson script to create the same screen is 1172 characters, nearly twice as many, and occupies 61 lines rather than 14, but before you dismiss Webson as being too wordy I must say this is a very basic example that doesn't make use of any of the more advanced features of the system. More complex scripts can be smaller than their HTML equivalents.
+This is a total of 655 characters. The corresponding Webson script to create the same screen is 1172 characters, nearly twice as many, and occupies 61 lines rather than 14, but before you dismiss Webson as being too wordy I must say this is a very basic example that doesn't make use of any of the more advanced features of the system. More complex scripts can be smaller than their HTML equivalents, as we'll see later.
 
-The reason for the extra size is partly that every item is named and partly because JSON itself is fairly bulky (lots of double-quotes), while the increase in lines is mainly because it's a lot more spaced out. High information density makes code hard to read at a glance as the eye has to pick out specific details from a dense surrounding mass. With Webson, the CSS properties are separated out, one per line, rather than all being crammed onto a single line. This could of course be done with HTML too, but because there's no agreed way to present it the result is usually an unstructured mess, so it's usual to put everything on the same line.
+The reason for the extra size is partly that every item is named and partly because JSON itself is fairly bulky (lots of double-quotes), while the increase in lines is mainly because it's a lot more spaced out. This is in the interests of readability; high information density makes code hard to read at a glance as the eye has to pick out specific details from a dense surrounding mass. With Webson, the CSS properties are separated out, one per line, rather than all being crammed onto a single line. This could of course be done with HTML too, but because there's no agreed way to present it the result is usually an unstructured mess, so most coders just put everything on the same line.
 
 Here's the script. I'll get on to some of the advanced features shortly.
 ```json
