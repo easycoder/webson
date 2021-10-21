@@ -196,7 +196,7 @@ Here I've left out the block for `$Center` as it's unchanged. Both `$Left` and `
 `$LRPanel` creates a `div`, applies padding to it and creates an inner `div` called `$LRSubPanel`. Note how the `$color` variable is passed down and used here, resulting in a colored panel with a white border. Note also the use of `calc()` in `$LRPanel` to allow for the padding, which in a conformant browser adds to the height of the element. This also neatly introduces another powerful feature of Webson; the ability to put user variables into expressions.
 
 ## The HTML
-To view this demo on a PC, use the following HTML file:
+To view this demo on a PC, place the following HTML file on your server:
 ```html
 <html>
   <head>
