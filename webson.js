@@ -118,19 +118,6 @@ const Webson = {
         }
     },
     
-    // Calculate a numeric value
-    calc: (element, spec, symbols) => {
-        let value;
-        const keys = Object.keys(spec);
-        for (let key of keys) {
-            value = eval(Webson.expand(element, spec[key], symbols));
-            symbols[key] = value;
-            if (symbols[`#debug`] >= 2) {
-                console.log(`#calc: ${JSON.stringify(spec,0,0)} -> ${value}`);
-            }
-        }
-    },
-    
     // Include another script
     include: (parent, name, path, symbols) => {
         if (symbols[`#debug`] >= 2) {
@@ -189,17 +176,6 @@ const Webson = {
             }
         }
         symbols[`#element`] = element;
-        // Do any #calc operations
-        if (typeof items[`#calc`] !== `undefined`) {
-            const data = items[`#calc`];
-            if (Array.isArray(data)) {
-                Object.keys(data).forEach(function(key) {
-                    Webson.calc(element, data[key], symbols);
-                });
-            } else if (typeof data === `object`) {
-                Webson.calc(element, data, symbols);
-            }
-        }
         // Do the main operations
         Object.keys(items).forEach(function(key) {
             let value = items[key];
@@ -208,7 +184,6 @@ const Webson = {
                 case `#debug`:
                 case "#doc":
                 case `#element`:
-                case `#calc`:
                     break;
                 case `#content`:
                     const val = Webson.expand(element, value, symbols);
@@ -308,14 +283,11 @@ const Webson = {
         if (typeof items[`#`] !== `undefined`) {
             const data = items[`#`];
             if (Array.isArray(data)) {
-                Object.keys(data).forEach(function(key) {
-                    const item = data[key];
-                    const name = item[`#item`];
+                data.forEach(function(name) {
                     Webson.build(element, name, symbols[name], symbols);
                 });
-            } else if (typeof data === `object`) {
-                const name = data[`#item`];
-                Webson.build(element, name, symbols[name], symbols);
+            } else if (data[0] === `$`) {
+                Webson.build(element, data, symbols[data], symbols);
             }
         }
     }, 

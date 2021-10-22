@@ -1,24 +1,22 @@
 {
     "#doc": "The parent container supplied from outside Webson",
-    "#": {"#item": "$Container"},
+    "#": "$Container",
     
     "$Container": {
         "#doc": "The inner container",
         "#element": "div",
-        "#calc": [
-            {"$NKeys": 10},
-            {"$NRows": 4},
-            {"$A": "$NKeys*2"},
-            {"$B": "$A/20"},
-            {"$C": "$NKeys+$B*2"},
-            {"$ButtonSize": "#parent_width/$C"},
-            {"$ButtonRadius": "$ButtonSize/5"},
-            {"$Gap": "$ButtonSize/20"},
-            {"$Height": "$ButtonSize+$Gap*2"}
-        ],
+        "$NKeys": 10,
+        "$NRows": 4,
+        "$A": "<$NKeys*2>",
+        "$B": "<$A/20>",
+        "$C": "<$NKeys+$B*2>",
+        "$ButtonSize": "<#parent_width/$C>",
+        "$ButtonRadius": "<$ButtonSize/5>",
+        "$Gap": "<$ButtonSize/20>",
+        "$Height": "<$ButtonSize+$Gap*2>",
         "padding": "<#parent_width/50>px",
         "background": "#444",
-        "#": {"#item": "$Rows"}
+        "#": "$Rows"
     },
     
     "$Rows": {
@@ -28,12 +26,7 @@
         "width": "100%",
         "height": "<$ButtonSize*$NRows+$Gap*$NRows*2+$Gap>px",
         "text-align": "center",
-        "#": [
-            {"#item": "$Row0"},
-            {"#item": "$Row1"},
-            {"#item": "$Row2"},
-            {"#item": "$Row3"}
-        ]
+        "#": ["$Row0", "$Row1", "$Row2", "$Row3"]
     },
     
     "$Row0": {
@@ -46,7 +39,7 @@
         "$RowLabels": [
             "q", "w", "e", "r", "t", "y", "u", "i", "o", "p"
         ],
-        "#": {"#item": "$Buttons"}
+        "#": "$Buttons"
     },
     
     "$Row1": {
@@ -59,7 +52,7 @@
         "$RowLabels": [
             "a", "s", "d", "f", "g", "h", "j", "k", "l"
         ],
-        "#": {"#item": "$Buttons"}
+        "#": "$Buttons"
     },
     
     "$Row2": {
@@ -72,11 +65,7 @@
         "$RowLabels": [
             "z", "x", "c", "v", "b", "n", "m"
         ],
-        "#": [
-            {"#item": "$Shift"},
-            {"#item": "$Buttons"},
-            {"#item": "$Backspace"}
-        ]
+        "#": ["$Shift", "$Buttons", "$Backspace"]
     },
     
     "$Row3": {
@@ -86,13 +75,7 @@
         "width": "100%",
         "height": "<$Height>px",
         "$Row": 3,
-        "#": [
-            {"#item": "$?123"},
-            {"#item": "$Comma"},
-            {"#item": "$Space"},
-            {"#item": "$Dot"},
-            {"#item": "$OK"}
-        ]
+        "#": ["$?123", "$Comma", "$Space", "$Dot", "$OK"]
     },
     
     "$Buttons": {
@@ -112,9 +95,7 @@
         "$Content": "Shift",
         "$Href": "shift",
         "$FontSize": "<$ButtonSize*0.4>",
-        "#": {
-            "#item": "$Button"
-        }
+        "#": "$Button"
     },
     
     "$Backspace": {
@@ -124,9 +105,7 @@
         "$Content": "Bksp",
         "$Href": "bksp",
         "$FontSize": "<$ButtonSize*0.4>",
-        "#": {
-            "#item": "$Button"
-        }
+        "#": "$Button"
     },
     
     "$?123": {
@@ -136,9 +115,7 @@
         "$Content": "?123",
         "$Href": "123",
         "$FontSize": "<$ButtonSize*0.4>",
-        "#": {
-            "#item": "$Button"
-        }
+        "#": "$Button"
     },
     
     "$Comma": {
@@ -148,9 +125,7 @@
         "$Content": ",",
         "$Href": ",",
         "$FontSize": "<$ButtonSize*0.5>",
-        "#": {
-            "#item": "$Button"
-        }
+        "#": "$Button"
     },
     
     "$Space": {
@@ -160,9 +135,7 @@
         "$Content": "&nbsp;",
         "$Href": "(sp)",
         "$FontSize": "<$ButtonSize*0.5>",
-        "#": {
-            "#item": "$Button"
-        }
+        "#": "$Button"
     },
     
     "$Dot": {
@@ -172,9 +145,7 @@
         "$Content": ".",
         "$Href": ".",
         "$FontSize": "<$ButtonSize*0.5>",
-        "#": {
-            "#item": "$Button"
-        }
+        "#": "$Button"
     },
     
     "$OK": {
@@ -184,9 +155,7 @@
         "$Content": "OK",
         "$Href": "OK",
         "$FontSize": "<$ButtonSize*0.4>",
-        "#": {
-            "#item": "$Button"
-        }
+        "#": "$Button"
     },
     
     "$StandardButton": {
@@ -198,9 +167,7 @@
             "#index": "#step"
         },
         "$FontSize": "<$ButtonSize*0.5>",
-        "#": {
-            "#item": "$Button"
-        }
+        "#": "$Button"
     },
     
     "$Button": {
@@ -213,9 +180,7 @@
         "height": "<$ButtonSize>px",
         "margin": "<$Gap>px",
         "border-radius": "$ButtonRadius",
-        "#": {
-            "#item": "$ButtonInner"
-        }
+        "#": "$ButtonInner"
     },
     
     "$ButtonInner": {
@@ -227,9 +192,7 @@
         "top": "10%",
         "border-radius": "<$ButtonRadius>px",
         "background": "#888",
-        "#": {
-            "#item": "$ButtonFace"
-        }
+        "#": "$ButtonFace"
     },
     
     "$ButtonFace": {
