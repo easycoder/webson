@@ -31,7 +31,6 @@
     },
     
     "$Row0": {
-        "#debug": 2,
         "#doc": "Row 0 of the keyboard",
         "#element": "div",
         "@id": "row0",
