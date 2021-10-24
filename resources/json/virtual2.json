@@ -88,7 +88,7 @@
             "shifted symbols": "$Shifted_symbols"
         },
         
-        "$Ddefault": {
+        "$Default": {
             "$RowLabels": [
                 "a", "s", "d", "f", "g", "h", "j", "k", "l"
             ],
