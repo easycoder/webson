@@ -2,7 +2,7 @@
 
 The virtual keyboard described [in the previous page](keyboard.md) is static, in that it doesn't change its appearance when a key is clicked. This is of course quite usual for HTML structures; it takes JavaScript code to do more than just call a new page when an item is clicked.
 
-However, we do have some JavaScript here; it's the engine that renders our page. And with some small additions to the Webson syntax we can do some interesting things. In this case I want the keyboard to respond to the Shift key by changing all the key labels to uppercase or back. I also want the ?123 key to force its own set of legends when clicked. And I'd like the 2 keys in question to change their background colors to indicate which states they're in. The result can be seen [here](https://webson.netlify.app/). You can take it for a test drive.
+However, we do have some JavaScript here; it's the engine that renders our page. And with some small additions to the Webson syntax we can do some interesting things. In this case I want the keyboard to respond to the Shift key by changing all the key labels to uppercase or back. I also want the ?123 key to force its own set of legends when clicked. And I'd like the 2 keys in question to change their background colors to indicate which states they're in. The result can be seen [here](https://webson.netlify.app/) and you can take it for a test drive.
 
 To do all this requires no conventional coding; just a couple of new Webson constructs. I'll explain them by showing the things that are different to the previous version. Let's start right at the top:
 ```json
@@ -121,11 +121,11 @@ The third and fourth rows contain the Shift and Symbol buttons, so here's the ne
             }
         },
 ```
-The magic is done by the `#onClick` directive. When the key is clicked, Webson examines the current status to see what the new status should be. It sets the insternal status variable to that value then reloads the entire structure. The 2 shifted states each have their own background colors to override the previous values.
+The magic is done by the `#onClick` directive. When the key is clicked, Webson examines the current status to see what the new status should be. It sets the internal status variable to that value then reloads the entire structure. The 2 shifted states each have their own background colors to override the previous values.
 
 Much the same is done for the ?123 key in the third row; see the full listing in the repository.
 
-This is the end of the Webson documentation for the time being. It's likely that fFurther feature may be added to Webson, but we'll be sure to document them fully if that happens.
+This is the end of the Webson documentation for the time being. It's likely that further feature may be added to Webson, but we'll be sure to document them fully if that happens.
 
 Feedback is welcome, as are suggestions for improvements. I hope some will find Webson useful.
 
