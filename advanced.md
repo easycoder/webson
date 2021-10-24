@@ -129,5 +129,4 @@ This is the end of the Webson documentation for the time being. It's likely that
 
 Feedback is welcome, as are suggestions for improvements. I hope some will find Webson useful.
 
-Graham Trott
-October 2021
+Graham Trott¸ October 2021
