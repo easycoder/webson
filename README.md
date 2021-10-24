@@ -48,18 +48,16 @@ The reason for the extra size in this example is partly that every item is named
 Here's the script. I'll get on to some of the advanced features shortly.
 ```json
 {
+    "#debug": 2,
     "width": "50%",
     "height": "50%",
     "display": "flex",
     "flex-direction": "column",
-    "#": [
-        {"#item": "$Top"},
-        {"#item": "$Middle"},
-        {"#item": "$Bottom"}
-    ],
+    "#": ["$Top", "$Middle", "$Bottom"],
     
     "$Top": {
         "#element": "div",
+        "@id": "top",
         "height": "20%",
         "background": "cyan"
     },
@@ -70,11 +68,7 @@ Here's the script. I'll get on to some of the advanced features shortly.
         "flex": 1,
         "display": "flex",
         "flex-direction": "row",
-        "#": [
-            {"#item": "$Left"},
-            {"#item": "$Center"},
-            {"#item": "$Right"}
-        ]
+        "#": ["$Left", "$Center", "$Right"]
     },
     
     "$Bottom": {
@@ -112,7 +106,7 @@ Running through the script, you will see that every DOM element has its own name
 
 In the above, most of the blocks include a `#element` directive, which names the DOM element type. If this is missing, everything in the block applies to the current element (the one defined in the block that calls this one). Here the only block that lacks an `#element` is the very first one, so the styles all apply to the parent container that was created outside Webson and passed to its renderer as a parameter.
 
-The symbol `#` by itself signals that child elements are to be added. This directive takes either a single object or an array of objects, each of which is an `#item` that names another block.
+The symbol `#` by itself signals that child elements are to be added. This directive takes either a single name or an array of names.
 
 The structure we've built here isn't much use unless we can add further items to the various `div`s. Some of this can be done with further Webson code but ultimately it will be a JavaScript function that populates elements of the DOM. For this to happen, elements must have unique ids to allow JavaScript to find them. Here's the `$Left` block again, with an id and a couple of other additions:
 ```json
