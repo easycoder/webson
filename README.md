@@ -45,7 +45,7 @@ This is a total of 655 characters. The corresponding Webson script to create the
 
 The reason for the extra size in this example is partly that every item is named and partly because JSON itself is fairly bulky (lots of double-quotes), while the increase in lines is mainly because it's a lot more spaced out. This is in the interests of readability; high information density makes code hard to read at a glance as the eye has to pick out specific details from a dense surrounding mass. With Webson, the CSS properties are separated out, one per line, rather than all being crammed onto a single line. This can of course be done with HTML too, but because there's no agreed way to present it the result is usually an unstructured mess, so most coders just put everything on the same line.
 
-Here's the script. It just uses a basic feture set; I'll get on to some of the advanced features later.
+Here's the script. It just uses a basic feature set; I'll get on to some of the advanced features later.
 ```json
 {
     "#debug": 2,
@@ -143,13 +143,15 @@ This is a simple example where all values are constants. The values appear to be
 
 `#doc` items can be either single lines of text or arrays of lines. They are just there for the benefit of the programmer and have no effect on the screen being constructed.
 
-A `#debug` directive affects its own block and those below it (defined using `@`). It has no effect on its calling block or those above it.
+A `#debug` directive affects its own block and those below it (defined using `#`).
 
 ## Nested bocks
 Webson implements nesting, whereby items declared at one level apply to all those in lower (contained) levels. Changing a value at one level only affects those at that level and beneath it; those above are unaffected.
 
 For example, let's suppose the two sidebars share a common feature; they each have an inner `div` and padding to produce a border. Here's what it should look like:
+
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/40rop60gtl0ool33fme4.png)
+
 To achieve this we can rewrite the last part of the script as follows:
 ```json
     "$Left": {
@@ -157,7 +159,7 @@ To achieve this we can rewrite the last part of the script as follows:
         "$ID": "left",
         "$Width": "25%",
         "$Color": "green",
-        "#": {"#item": "$LRPanel"}
+        "#": "$LRPanel"
     },
     
     "$Right": {
@@ -165,7 +167,7 @@ To achieve this we can rewrite the last part of the script as follows:
         "$ID": "right",
         "$Width": "15%",
         "$Color": "blue",
-        "#": {"#item": "$LRPanel"}
+        "#": "$LRPanel"
     },
     
     "$LRPanel": {
@@ -174,7 +176,7 @@ To achieve this we can rewrite the last part of the script as follows:
         "width": "calc($Width - 2em)",
         "height": "calc(100% - 2em)",
         "padding": "1em",
-        "#": {"#item": "$LRSubPanel"}
+        "#": "$LRSubPanel"
     },
     
     "$LRSubPanel": {
@@ -182,12 +184,12 @@ To achieve this we can rewrite the last part of the script as follows:
         "@id": "$ID",
         "width": "100%",
         "height": "100%",
-        "background": "Ccolor"
+        "background": "$Color"
     }
 ```
-Here I've left out the block for `$Center` as it's unchanged. Both `$Left` and `$Right` now no longer declare their own `#element`; instead they set up user-defined variables `$ID`, `$Width` and `$Color` and invoke `$LRPanel` to construct the element. I suggest using an initial capital letter for each name, to make them easier to spot, but it's not mandatory. Any variable declared or modified at a given level in the structure will be visible at all points beneath that one, but changes do not propagate upwards.
+Here I've left out the block for `$Center` as it's unchanged. Both `$Left` and `$Right` now no longer declare their own `#element`; instead they set up user-defined variables `$ID`, `$Width` and `$Color` and invoke `$LRPanel` to construct the element. I suggest using an initial capital letter for each variable name, to make them easier to spot, but it's not mandatory. Any variable declared or modified at a given level in the structure will be visible at all points beneath that one, but changes do not propagate upwards.
 
-`$LRPanel` creates a `div`, applies padding to it and creates an inner `div` called `$LRSubPanel`. Note how the `$color` variable is passed down and used here, resulting in a colored panel with a white border. Note also the use of `calc()` in `$LRPanel` to allow for the padding, which in a conformant browser adds to the height of the element. This also neatly introduces another powerful feature of Webson; the ability to put user variables into expressions.
+`$LRPanel` creates a `div`, applies padding to it and creates an inner `div` called `$LRSubPanel`. Note how the `$Color` variable is passed down and used here, resulting in a colored panel with a white border. Note also the use of `calc()` in `$LRPanel` to allow for the padding, which in a conformant browser adds to the height of the element. This also neatly introduces another powerful feature of Webson; the ability to put user variables into expressions.
 
 ## The HTML
 To view this demo on a PC, place the following HTML file on your server:
