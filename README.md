@@ -2,9 +2,9 @@
 Webson is a JSON markup syntax for representing DOM elements, enabling entire web pages to be described without any HTML, and a JavaScript runtime engine to build pages in the browser. It has a number of key features such as variables and repeat blocks, that avoid the repetition found in large HTML scripts.
 
 ## Introduction
-A web page is the visual representation of a Document Object Model, or DOM, the data structure understood by all browsers. In the past the DOM was constructed by the browser from HTML on the page and CSS supplied from the server, but more recently it has become increasingly common for JavaScript to create the DOM itself, with no HTML ever being seen. While this suits programmers well it requires a particular skill set that is not always held by those building pages the traditional way.
+A web page is the visual representation of a Document Object Model, or DOM, the data structure understood by all browsers. Traditionally, the DOM was constructed by the browser from HTML on the page and CSS supplied from the server, but more recently it has become increasingly common for JavaScript to create the DOM itself, with no HTML ever being seen. While this suits programmers well it requires a particular skill set that is not always held by those building pages the traditional way.
 
-Web pages have become very complex, with hundreds or thousands of elements all carefully positioned to create the desired result. There's no way to hide this complexity, whether it's done with HTML/CSS, JavaScript or some kind of no-code visual builder. In the end it's a human brain that's doing the real work of translating the customer's requirements into something the browser can use to create the DOM.
+Web pages have become very complex, with hundreds or thousands of elements all carefully positioned to create the desired result. There's no way to hide this complexity, whether it's done with HTML/CSS, JavaScript or some kind of no-code visual builder. In the end it's a human brain that's doing the real work of translating the customer's requirements - a mental picture - into something the browser can use to create the DOM.
 
 HTML is a form of "markup", the ultimate expression of which came in the form of XML, able to represent not only visual structures but a wide range of other data too. Unfortunately, XML is wordy and hard to read and is not greatly loved. In 2001, Douglas Crockford invented (he would say "discovered") a simpler syntax for representing data structures, as a means of transferring data in and out of JavaScript programs in the form of plain text. The syntax is JavaScript Object Notation, or JSON, and in the past 2 decades it has widely supplanted XML. Virtually every programming language has the ability to read and write JSON and it's now the most common way to transfer data across the Web.
 
@@ -15,9 +15,9 @@ _How about conditional structures?_
 
 which would greatly reduce the amount of markup needed to describe a complex web page, where items are commonly repeated with only minor differences.
 
-This article introduces _Webson_, a proposed markup syntax that allows JSON to be used to describe a DOM, and provides a JavaScript rendering engine that can be embedded in any web page to process scripts at runtime. The system is immediately usable by HTML/CSS coders and no JavaScript experience is required. It's aimed at simplifying the design and implementation of highly complex layouts, where precise positioning of large numbers of elements is hard to achieve manually, and it achieves this with markup rather than with code.
+This article introduces _Webson_, a proposed markup syntax that allows JSON to be used to describe a DOM, and provides a JavaScript rendering engine that can be embedded in any web page to process scripts at runtime. The system is immediately usable by HTML/CSS coders and no JavaScript experience is required. It's aimed at simplifying the design and implementation of highly complex layouts, where precise positioning of large numbers of elements is hard to achieve manually, and it achieves this with JSON markup rather than with code.
 
-> _I should perhaps note that this project started as a post-retirement coding exercise to keep the brain cells ticking over, without any specific aim in mind. Whether it has any real value I cannot say, but some may find it a useful building block._
+> _I should perhaps note that this project is a post-retirement coding exercise to keep the brain cells ticking over, without any specific aim in mind. Whether it has any real value I cannot say, but some may find it a useful building block._
 
 ## Getting started
 Let's start with a simple example; a layout commonly found in online magazines and social media. At the top there's a full-width header; under this a central panel with 2 sidebars and at the bottom a footer. As this is only an example I've given each of the component `div`s its own background color so it stands out clearly. It looks like this:
@@ -41,11 +41,11 @@ Here's the HTML that will create this screen. It uses inline styles to avoid the
         </div>
     </div>
 ```
-This is a total of 655 characters. The corresponding Webson script to create the same screen is 1172 characters, nearly twice as many, and occupies 61 lines rather than 14, but before you dismiss Webson as being too wordy I must say this is a very basic example that doesn't make use of any of the more advanced features of the system. More complex scripts tend to be far smaller than their HTML equivalents, as we'll see later.
+This is a total of 655 characters. The corresponding Webson script to create the same screen is 1172 characters, nearly twice as many, and occupies 61 lines rather than 14, but before you dismiss Webson as being too wordy I must say in its defence that this is a very basic example which doesn't make use of any of the more advanced features of the system. More complex scripts tend to be far smaller than their HTML equivalents, as we'll see later.
 
-The reason for the extra size in this example is partly that every item is named and partly because JSON itself is fairly bulky (lots of double-quotes), while the increase in lines is mainly because it's a lot more spaced out. This is in the interests of readability; high information density makes code hard to read at a glance as the eye has to pick out specific details from a dense surrounding mass. With Webson, the CSS properties are separated out, one per line, rather than all being crammed onto a single line. This could of course be done with HTML too, but because there's no agreed way to present it the result is usually an unstructured mess, so most coders just put everything on the same line.
+The reason for the extra size in this example is partly that every item is named and partly because JSON itself is fairly bulky (lots of double-quotes), while the increase in lines is mainly because it's a lot more spaced out. This is in the interests of readability; high information density makes code hard to read at a glance as the eye has to pick out specific details from a dense surrounding mass. With Webson, the CSS properties are separated out, one per line, rather than all being crammed onto a single line. This can of course be done with HTML too, but because there's no agreed way to present it the result is usually an unstructured mess, so most coders just put everything on the same line.
 
-Here's the script. I'll get on to some of the advanced features shortly.
+Here's the script. It just uses a basic feture set; I'll get on to some of the advanced features later.
 ```json
 {
     "#debug": 2,
@@ -108,7 +108,7 @@ In the above, most of the blocks include a `#element` directive, which names the
 
 The symbol `#` by itself signals that child elements are to be added. This directive takes either a single name or an array of names.
 
-The structure we've built here isn't much use unless we can add further items to the various `div`s. Some of this can be done with further Webson code but ultimately it will be a JavaScript function that populates elements of the DOM. For this to happen, elements must have unique ids to allow JavaScript to find them. Here's the `$Left` block again, with an id and a couple of other additions:
+The structure we've built here isn't much use unless we can add further items to the various `div`s. Some of this can be done with further Webson code but ultimately you'll either use an `onClick="<something>"` callout or a JavaScript function that populates elements of the DOM. For the latter to work, elements must have unique ids to allow JavaScript to find them. Here's the `$Left` block again, with an id and a couple of other additions:
 ```json
     "$Left": {
         "#debug": 2,
