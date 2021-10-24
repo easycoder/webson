@@ -160,20 +160,19 @@
     
     "$StandardButton": {
         "#doc": "This is a standard key",
-        "$ID": "r<$Row>-$Content",
+        "$ID": "r$Row-$Content",
         "$Width": "$ButtonSize",
+        "$FontSize": "$ButtonSize*0.5",
         "$Content": {
             "#select": "$RowLabels",
             "#index": "#step"
         },
-        "$FontSize": "<$ButtonSize*0.5>",
         "#": "$Button"
     },
     
     "$Button": {
         "#doc": "This is the outer container for a button",
         "#element": "div",
-        "@id": "$ID",
         "position": "relative",
         "display": "inline-block",
         "width": "<$Width>px",

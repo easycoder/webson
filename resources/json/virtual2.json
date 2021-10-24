@@ -1,0 +1,363 @@
+{
+    "#doc": "The parent container supplied from outside Webson",
+    "#": "$Container",
+    
+    "$Container": {
+        "#doc": "The inner container",
+        "#element": "div",
+        "$NKeys": 10,
+        "$NRows": 4,
+        "$A": "<$NKeys*2>",
+        "$B": "<$A/20>",
+        "$C": "<$NKeys+$B*2>",
+        "$ButtonSize": "<#parent_width/$C>",
+        "$ButtonRadius": "<$ButtonSize/5>",
+        "$Gap": "<$ButtonSize/20>",
+        "$Height": "<$ButtonSize+$Gap*2>",
+        "padding": "<#parent_width/50>px",
+        "background": "#444",
+        "$ButtonBackground": "#888",
+        "#": "$Rows"
+    },
+    
+    "$Rows": {
+        "#doc": "The row holder",
+        "#element": "div",
+        "@id": "rowHolder",
+        "width": "100%",
+        "height": "<$ButtonSize*$NRows+$Gap*$NRows*2+$Gap>px",
+        "text-align": "center",
+        "#": ["$Row0", "$Row1", "$Row2", "$Row3"]
+    },
+    
+    "$Row0": {
+        "#debug": 2,
+        "#doc": "Row 0 of the keyboard",
+        "#element": "div",
+        "@id": "row0",
+        "width": "100%",
+        "height": "<$Height>px",
+        "$Row": 0,
+        "#switch": {
+            "default": "$Row0_default",
+            "shifted": "$Row0_shifted",
+            "symbols": "$Row0_symbols",
+            "shifted symbols": "$Row0_shifted_symbols"
+        },
+
+        "$Row0_default": {
+            "$RowLabels": [
+                "q", "w", "e", "r", "t", "y", "u", "i", "o", "p"
+            ],
+            "#": "$Buttons"
+        },
+        
+        "$Row0_shifted": {
+            "$RowLabels": [
+                "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"
+            ],
+            "#": "$Buttons"
+        },
+        
+        "$Row0_symbols": {
+            "$RowLabels": [
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
+            ],
+            "#": "$Buttons"
+        },
+        
+        "$Row0_shifted_symbols": {
+            "$RowLabels": [
+                "~", "`", "|", "™", "¿", "«", "»", "¼", "½", "¾"
+            ],
+            "#": "$Buttons"
+        }
+    },
+        
+    "$Row1": {
+        "#doc": "Row 1 of the keyboard",
+        "#element": "div",
+        "@id": "row1",
+        "width": "100%",
+        "height": "<$Height>px",
+        "$Row": 1,
+        "#switch": {
+            "default": "$Row1_default",
+            "shifted": "$Row1_shifted",
+            "symbols": "$Row1_symbols",
+            "shifted symbols": "$Row1_shifted_symbols"
+        },
+        
+        "$Row1_default": {
+            "$RowLabels": [
+                "a", "s", "d", "f", "g", "h", "j", "k", "l"
+            ],
+            "#": "$Buttons"
+        },
+        
+        "$Row1_shifted": {
+            "$RowLabels": [
+                "A", "S", "D", "F", "G", "H", "J", "K", "L"
+            ],
+            "#": "$Buttons"
+        },
+        
+        "$Row1_symbols": {
+            "$RowLabels": [
+                "&commat;", "&num;", "&dollar;", "_", "&", "-", "+", "(", ")", "\\"
+            ],
+            "#": "$Buttons"
+        },
+        
+        "$Row1_shifted_symbols": {
+            "$RowLabels": [
+                "€", "¥", "₤", "¢", "^", "°", "=", "{", "}", "\\"
+            ],
+            "#": "$Buttons"
+        }
+    },
+    
+    "$Row2": {
+        "#doc": "Row 2 of the keyboard",
+        "#element": "div",
+        "@id": "row2",
+        "width": "100%",
+        "height": "<$Height>px",
+        "$Row": 2,
+        "#switch": {
+            "default": "$Row2_default",
+            "shifted": "$Row2_shifted",
+            "symbols": "$Row2_symbols",
+            "shifted symbols": "$Row2_shifted_symbols"
+        },
+        
+        "$Row2_default": {
+            "$RowLabels": [
+                "z", "x", "c", "v", "b", "n", "m"
+            ],
+            "#": ["$Shift", "$Buttons", "$Backspace"]
+        },
+        
+        "$Row2_shifted": {
+            "$RowLabels": [
+                "Z", "X", "C", "V", "B", "N", "M"
+            ],
+            "#": ["$Shift", "$Buttons", "$Backspace"]
+        },
+        
+        "$Row2_symbols": {
+            "$RowLabels": [
+                "*", "\"", "'", ":", ";", "!", "?"
+            ],
+            "#": ["$Shift", "$Buttons", "$Backspace"]
+        },
+        
+        "$Row2_shifted_symbols": {
+            "$RowLabels": [
+                "%", "©", "®", "™", "§", "[", "]"
+            ],
+            "#": ["$Shift", "$Buttons", "$Backspace"]
+        },
+        
+        "$Shift": {
+            "#doc": "This is the Shift key",
+            "$ID": "Shift",
+            "$Width": "<$ButtonSize*1.6>",
+            "$Content": "Shift",
+            "$Href": "#",
+            "$FontSize": "<$ButtonSize*0.4>",
+            "#switch": {
+                "default": "$Default",
+                "shifted": "$Shifted",
+                "symbols": "$Symbols",
+                "shifted symbols": "$Shifted_Symbols"
+            },
+            "#onClick": {
+                "default": "shifted",
+                "shifted": "default",
+                "symbols": "shifted symbols",
+                "shifted symbols": "symbols"
+            },
+            
+            "$Default": {
+                "#": "$Button"
+            },
+            
+            "$Shifted": {
+                "$ButtonBackground": "#c88",
+                "#": "$Button"
+            },
+            
+            "$Symbols": {
+                "#": "$Button"
+            },
+            
+            "$Shifted_Symbols": {
+                "$ButtonBackground": "#c88",
+                "#": "$Button"
+            }
+        },
+
+        "$Backspace": {
+            "#doc": "This is the Backspace key",
+            "$ID": "Bksp",
+            "$Width": "<$ButtonSize*1.6>",
+            "$Content": "Bksp",
+            "$Href": "bksp",
+            "$FontSize": "<$ButtonSize*0.4>",
+            "#": "$Button"
+        }
+    },
+    
+    "$Row3": {
+        "#doc": "Row 3 of the keyboard",
+        "#element": "div",
+        "@id": "row3",
+        "width": "100%",
+        "height": "<$Height>px",
+        "$Row": 3,
+        "#": ["$?123", "$Comma", "$Space", "$Dot", "$OK"],
+
+        "$?123": {
+            "#doc": "This is the ?123 key",
+            "$ID": "123",
+            "$Width": "<$ButtonSize*1.5>",
+            "$Content": "?123",
+            "$Href": "123",
+            "$FontSize": "<$ButtonSize*0.4>",
+            "#switch": {
+                "default": "$Default",
+                "shifted": "$Shifted",
+                "symbols": "$Symbols",
+                "shifted symbols": "$Shifted_Symbols"
+            },
+            "#onClick": {
+                "default": "symbols",
+                "shifted": "symbols",
+                "symbols": "default",
+                "shifted symbols": "symbols"
+            },
+            
+            "$Default": {
+                "#": "$Button"
+            },
+            
+            "$Shifted": {
+                "#": "$Button"
+            },
+            
+            "$Symbols": {
+                "$ButtonBackground": "#8c8",
+                "#": "$Button"
+            },
+            
+            "$Shifted_Symbols": {
+                "$ButtonBackground": "#cc8",
+                "#": "$Button"
+            }
+        },
+        
+        "$Comma": {
+            "#doc": "This is the Comma key",
+            "$ID": ",",
+            "$Width": "$ButtonSize",
+            "$Content": ",",
+            "$Href": ",",
+            "$FontSize": "<$ButtonSize*0.5>",
+            "#": "$Button"
+        },
+
+        "$Space": {
+            "#doc": "This is the Space key",
+            "$ID": "(sp)",
+            "$Width": "<$ButtonSize*5>",
+            "$Content": "&nbsp;",
+            "$Href": "(sp)",
+            "$FontSize": "<$ButtonSize*0.5>",
+            "#": "$Button"
+        },
+        
+        "$Dot": {
+            "#doc": "This is the Dot key",
+            "$ID": ".",
+            "$Width": "$ButtonSize",
+            "$Content": ".",
+            "$Href": ".",
+            "$FontSize": "<$ButtonSize*0.5>",
+            "#": "$Button"
+        },
+        
+        "$OK": {
+            "#doc": "This is the OK key",
+            "$ID": "OK",
+            "$Width": "<$ButtonSize*1.5>",
+            "$Content": "OK",
+            "$Href": "OK",
+            "$FontSize": "<$ButtonSize*0.4>",
+            "#": "$Button"
+        }
+    },
+    
+    "$Buttons": {
+        "#repeat": {
+            "#doc": "This repeats a row of keys",
+            "#target": "$StandardButton",
+            "#steps": {
+                "#arraysize": "$RowLabels"
+            }
+        },
+        
+        "$StandardButton": {
+            "#doc": "This is a standard key",
+            "$ID": "r$Row-$Content",
+            "$Width": "$ButtonSize",
+            "$FontSize": "$ButtonSize*0.5",
+            "$Content": {
+                "#select": "$RowLabels",
+                "#index": "#step"
+            },
+            "#": "$Button"
+        }
+    },
+
+    "$Button": {
+        "#doc": "This is the outer container for a button",
+        "#element": "div",
+        "position": "relative",
+        "display": "inline-block",
+        "width": "<$Width>px",
+        "height": "<$ButtonSize>px",
+        "margin": "<$Gap>px",
+        "border-radius": "$ButtonRadius",
+        "#": "$ButtonInner",
+
+        "$ButtonInner": {
+            "#doc": "This is the button inner container",
+            "#element": "div",
+            "position": "relative",
+            "width": "<$Width-$ButtonSize/10>",
+            "height": "90%",
+            "top": "10%",
+            "border-radius": "<$ButtonRadius>px",
+            "background": "$ButtonBackground",
+            "#": "$ButtonFace"
+        },
+        
+        "$ButtonFace": {
+            "#doc": "This is the actual button face",
+            "#element": "a",
+            "@id": "id-$ID",
+            "display": "block",
+            "position": "absolute",
+            "width": "100%",
+            "top": "<$ButtonSize*0.7-$FontSize>px",
+            "color": "white",
+            "font-family": "Arial, Helvetica, sans-serif",
+            "font-size": "<$FontSize>px",
+            "font-weight": "bold",
+            "text-decoration": "none",
+            "@href": "https://test.com?key=$Content",
+            "#content": "$Content"
+        }
+    }
+}

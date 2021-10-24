@@ -144,6 +144,9 @@ const Webson = {
         if (typeof name === `undefined`) {
             throw Error(`build: element is undefined (is the #element directive missing?`);
         }
+        if (typeof items === `undefined`) {
+            throw Error(`build: item is undefined`);
+        }
         // Deep copy the symbol table
         const symbols = JSON.parse(JSON.stringify(parentSymbols));
         // Expand all definitions
@@ -257,25 +260,35 @@ const Webson = {
                     }
                     break;
                 case `#switch`:
-                    let item = Webson.expand(parent, value.value, symbols);
-                    let cases = value.cases;
-                    if (typeof item === `undefined`) {
-                        throw Error(`Missing 'value' in '@switch'`);
-                    }
-                    if (typeof cases === `undefined`) {
-                        throw Error(`Missing 'cases' in '@switch'`);
-                    }
-                    const keys = Object.keys(cases);
-                    for (key of keys) {
-                        if (key === item) {
-                            Webson.build(element, name, symbols[cases[key]], symbols);
+                    const keys = Object.keys(value);
+                    for (let state of keys) {
+                        if (state === symbols[`#state`]) {
+                            Webson.build(element, value[state], symbols[value[state]], symbols);
                             return;
                         }
                     };
-                    Webson.build(element, name, symbols[cases[`default`]], symbols);
+                    Webson.build(element, name, symbols[value[`default`]], symbols);
+                    break;
+                case `#onClick`:
+                    element.onClickItems = value;
+                    element.onclick = function (event) {
+                        event.stopPropagation();
+                        for (let state of Object.keys(element.onClickItems)) {
+                            if (state === symbols[`#state`]) {
+                                Webson.parent.replaceChildren();
+                                Webson.build(Webson.parent, Webson.name, Webson.script, {
+                                    "debug": 0,
+                                    "#state": value[state]
+                                });
+                                return false;
+                            }
+                        };
+                        return false;
+                    }
                     break;
                 default:
                     if (key[0] === `@`) {
+                        // Handle attributes
                         const aName = key.substring(1);
                         const aValue = Webson.expand(parent, value, symbols);
                         element.setAttribute(aName, aValue);
@@ -284,12 +297,14 @@ const Webson = {
                                 `Attribute ${aName}: ${JSON.stringify(value,0,0)} -> ${aValue}`);
                         }
                     } else if (key[0] === `$`) {
+                        // Handle user variables
                         const val = Webson.expand(element, value, symbols);
                         symbols[key] = val;
                         if (symbols[`#debug`] >= 2) {
                             console.log(`Variable ${key}: ${JSON.stringify(value,0,0)} -> ${val}`);
                         }
                     } else {
+                        // Handle properties
                         const val = Webson.expand(element, value, symbols);
                         element.style[key] = val;
                         if (symbols[`#debug`] >= 2) {
@@ -314,8 +329,12 @@ const Webson = {
     
     // Render a script into a given container
     render: (parent, name, script) => {
-        Webson.build(parent, name, JSON.parse(script), {
-            "#debug": 0
+        Webson.parent = parent;
+        Webson.name = name;
+        Webson.script = JSON.parse(script);
+        Webson.build(parent, name, Webson.script, {
+            "#debug": 0,
+            "#state": "default"
         });
     }
 };
