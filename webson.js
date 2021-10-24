@@ -1,3 +1,5 @@
+// Webson is a rendering engine for JSON-based markup scripts.
+
 const Webson = {
     
     // Expand all variables in a value.
@@ -253,6 +255,24 @@ const Webson = {
                             const path = value[name];
                         Webson.include(element, name, path, symbols);
                     }
+                    break;
+                case `#switch`:
+                    let item = Webson.expand(parent, value.value, symbols);
+                    let cases = value.cases;
+                    if (typeof item === `undefined`) {
+                        throw Error(`Missing 'value' in '@switch'`);
+                    }
+                    if (typeof cases === `undefined`) {
+                        throw Error(`Missing 'cases' in '@switch'`);
+                    }
+                    const keys = Object.keys(cases);
+                    for (key of keys) {
+                        if (key === item) {
+                            Webson.build(element, name, symbols[cases[key]], symbols);
+                            return;
+                        }
+                    };
+                    Webson.build(element, name, symbols[cases[`default`]], symbols);
                     break;
                 default:
                     if (key[0] === `@`) {
