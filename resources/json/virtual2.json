@@ -39,34 +39,34 @@
         "height": "<$Height>px",
         "$Row": 0,
         "#switch": {
-            "default": "$Row0_default",
-            "shifted": "$Row0_shifted",
-            "symbols": "$Row0_symbols",
-            "shifted symbols": "$Row0_shifted_symbols"
+            "default": "$Default",
+            "shifted": "$Shifted",
+            "symbols": "$Symbols",
+            "shifted symbols": "$Shifted_symbols"
         },
 
-        "$Row0_default": {
+        "$Default": {
             "$RowLabels": [
                 "q", "w", "e", "r", "t", "y", "u", "i", "o", "p"
             ],
             "#": "$Buttons"
         },
         
-        "$Row0_shifted": {
+        "$Shifted": {
             "$RowLabels": [
                 "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"
             ],
             "#": "$Buttons"
         },
         
-        "$Row0_symbols": {
+        "$Symbols": {
             "$RowLabels": [
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
             ],
             "#": "$Buttons"
         },
         
-        "$Row0_shifted_symbols": {
+        "$Shifted_symbols": {
             "$RowLabels": [
                 "~", "`", "|", "™", "¿", "«", "»", "¼", "½", "¾"
             ],
@@ -82,34 +82,34 @@
         "height": "<$Height>px",
         "$Row": 1,
         "#switch": {
-            "default": "$Row1_default",
-            "shifted": "$Row1_shifted",
-            "symbols": "$Row1_symbols",
-            "shifted symbols": "$Row1_shifted_symbols"
+            "default": "$Default",
+            "shifted": "$Shifted",
+            "symbols": "$Symbols",
+            "shifted symbols": "$Shifted_symbols"
         },
         
-        "$Row1_default": {
+        "$Ddefault": {
             "$RowLabels": [
                 "a", "s", "d", "f", "g", "h", "j", "k", "l"
             ],
             "#": "$Buttons"
         },
         
-        "$Row1_shifted": {
+        "$Shifted": {
             "$RowLabels": [
                 "A", "S", "D", "F", "G", "H", "J", "K", "L"
             ],
             "#": "$Buttons"
         },
         
-        "$Row1_symbols": {
+        "$Symbols": {
             "$RowLabels": [
                 "&commat;", "&num;", "&dollar;", "_", "&", "-", "+", "(", ")", "\\"
             ],
             "#": "$Buttons"
         },
         
-        "$Row1_shifted_symbols": {
+        "$Shifted_symbols": {
             "$RowLabels": [
                 "€", "¥", "₤", "¢", "^", "°", "=", "{", "}", "\\"
             ],
