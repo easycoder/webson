@@ -161,3 +161,5 @@ Now we've reached the point where we can create a button. It's a 3-stage process
 This is where all the styles get applied. I've kept them all inline here to avoid the need to call out to a separate file, but you can of course use CSS classes if you prefer, by having a `@class` attribute. My view is that excessive use of classes is bad as it impairs readability. They're fine for global things like color schemes, margins and element sizes, but they should be avoided for single-use cases, where they are closely associated with specific elements. In Webson, inline styles tend to make the markup more compact but they presumably add an overhead to the size of the DOM. It's unlikely to cause memory issues but in a really complex design such things may matter.
 
 The complete keyboard script can be found in the [repository](https://github.com/easycoder/webson).
+
+[Next: Advanced Webson scripting](advanced.md)
