@@ -145,7 +145,7 @@ This is a simple example where all values are constants. The values appear to be
 
 A `#debug` directive affects its own block and those below it (defined using `#`).
 
-## Nested bocks
+## Nested blocks
 Webson implements nesting, whereby items declared at one level apply to all those in lower (contained) levels. Changing a value at one level only affects those at that level and beneath it; those above are unaffected.
 
 For example, let's suppose the two sidebars share a common feature; they each have an inner `div` and padding to produce a border. Here's what it should look like:

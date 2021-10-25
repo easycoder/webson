@@ -3,7 +3,7 @@
 const Webson = {
     
     // Expand all variables in a value.
-    // Expressions inside parentheses are fed to eval().
+    // Expressions inside angle braces are fed to eval().
     expand: (element, input, symbols) => {
         let output = input;
         let mod = true;
