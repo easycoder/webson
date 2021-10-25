@@ -132,7 +132,7 @@ Another feature above reveals a built-in debugging capability. When hand-buildin
 which enables you to see clearly what is happening. The output for the above is
 ```
 Build $Left
-The left column
+The left-hand sidebar
 #element: div
 Style display: "inline-block" -> inline-block
 Style width: "25%" -> 25%
