@@ -1,23 +1,22 @@
 ## Synopsis
-Webson is a JSON markup syntax for representing DOM elements, enabling entire web pages to be described without any HTML, and a JavaScript runtime engine to build pages in the browser. It has a number of key features such as variables and repeat blocks, that avoid the repetition found in large HTML scripts.
-
+Webson is an easy-to-use JSON syntax for representing DOM elements, enabling entire web pages to be described without any HTML. It includes a JavaScript runtime engine to build pages in the browser. It has a number of key features such as variables and repeat blocks, that avoid the repetition found in large HTML scripts.
+  
 ## Introduction
-A web page is the visual representation of a Document Object Model, or DOM, the data structure understood by all browsers. Traditionally, the DOM was constructed by the browser from HTML on the page and CSS supplied from the server, but more recently it has become increasingly common for JavaScript to create the DOM itself, with no HTML ever being seen. While this suits programmers well it requires a particular skill set that is not always held by those building pages the traditional way.
+A web page is the visual representation of a Document Object Model, or DOM, the data structure maintained internally by all browsers. Traditionally, the DOM is constructed by the browser from HTML scripts, but as pages get bigger and more complex HTML becomes ever more cumbersome. In recent years it has become increasingly common to create the DOM using JavaScript, with no HTML ever being seen, but while this suits programmers well it requires a different skill set from that needed to build pages the traditional way.
 
-Web pages have become very complex, with hundreds or thousands of elements all carefully positioned to create the desired result. There's no way to hide this complexity, whether it's done with HTML/CSS, JavaScript or some kind of no-code visual builder. In the end it's a human brain that's doing the real work of translating the customer's requirements - a mental picture - into something the browser can use to create the DOM.
+Today's Web pages may have hundreds or thousands of elements, all carefully positioned to create the desired result. There's no way to hide this complexity, whether it's done with HTML/CSS, JavaScript or some kind of no-code visual builder. In the end it's a human brain that's doing the real work of translating the customer's requirements - a mental picture - into something the browser can use to create the DOM.
 
-HTML is a form of "markup", the ultimate expression of which came in the form of XML, able to represent not only visual structures but a wide range of other data too. Unfortunately, XML is wordy and hard to read and is not greatly loved. In 2001, Douglas Crockford invented (he would say "discovered") a simpler syntax for representing data structures, as a means of transferring data in and out of JavaScript programs in the form of plain text. The syntax is JavaScript Object Notation, or JSON, and in the past 2 decades it has widely supplanted XML. Virtually every programming language has the ability to read and write JSON and it's now the most common way to transfer data across the Web.
+HTML is not program code; it's a form of "markup", the ultimate expression of which came in the form of XML, able to represent not only visual structures but a wide range of other data too. Unfortunately, XML is wordy and hard to read and is not greatly loved. In 2001, Douglas Crockford invented (he would say "discovered") a simpler syntax for representing data structures, as a means of transferring data in and out of JavaScript programs in the form of plain text. The syntax is JavaScript Object Notation, or JSON, and in the past 2 decades it has widely supplanted XML. Virtually every programming language has the ability to read and write JSON and it's now the most common way to transfer data across the Web.
 
 Since HTML shares many of the disadvantages of XML, the question might be asked, _Can JSON also replace HTML?_. If the answer is "yes", a couple of supplementary questions might be
 
-_Can we have user-defined variables and reusable blocks?_
-_How about conditional structures?_
+ _Can we have user-defined variables and reusable blocks?_ 
+ _How about conditional structures?_
 
 which would greatly reduce the amount of markup needed to describe a complex web page, where items are commonly repeated with only minor differences.
 
-This article introduces _Webson_, a proposed markup syntax that allows JSON to be used to describe a DOM, and provides a JavaScript rendering engine that can be embedded in any web page to process scripts at runtime. The system is immediately usable by HTML/CSS coders and no JavaScript experience is required. It's aimed at simplifying the design and implementation of highly complex layouts, where precise positioning of large numbers of elements is hard to achieve manually, and it achieves this with JSON markup rather than with code.
-
-> _I should perhaps note that this project is a post-retirement coding exercise to keep the brain cells ticking over, without any specific aim in mind. Whether it has any real value I cannot say, but some may find it a useful building block._
+## Webson
+Webson is a markup syntax that allows JSON to be used to describe a DOM, together with a JavaScript rendering engine that can be embedded in any web page to process scripts at runtime. The system is immediately usable by HTML/CSS coders and no JavaScript experience is required. It's aimed at simplifying the design and implementation of highly complex layouts, where precise positioning of large numbers of elements is hard to achieve manually, and it achieves this with JSON markup rather than with code.
 
 ## Getting started
 Let's start with a simple example; a layout commonly found in online magazines and social media. At the top there's a full-width header; under this a central panel with 2 sidebars and at the bottom a footer. As this is only an example I've given each of the component `div`s its own background color so it stands out clearly. It looks like this:
@@ -102,13 +101,14 @@ Here's the script. It just uses a basic feature set; I'll get on to some of the 
     }
 }
 ```
+## How it works
 Running through the script, you will see that every DOM element has its own named block of JSON data. User-defined names all start with `$`. There are also directives and other system items; the names of these start with `#`. Everything else in the script above is a CSS style to be applied to the current element.
 
 In the above, most of the blocks include a `#element` directive, which names the DOM element type. If this is missing, everything in the block applies to the current element (the one defined in the block that calls this one). Here the only block that lacks an `#element` is the very first one, so the styles all apply to the parent container that was created outside Webson and passed to its renderer as a parameter.
 
 The symbol `#` by itself signals that child elements are to be added. This directive takes either a single name or an array of names.
-
-The structure we've built here isn't much use unless we can add further items to the various `div`s. Some of this can be done with further Webson code but ultimately you'll either use an `onClick="<something>"` callout or a JavaScript function that populates elements of the DOM. For the latter to work, elements must have unique ids to allow JavaScript to find them. Here's the `$Left` block again, with an id and a couple of other additions:
+## Attributes
+The structure we've built here isn't much use unless we can add further items to the various `div`s. Some of this can be done with further Webson code but ultimately you'll either use an `onClick="<something>"` callout or a JavaScript function that populates or interacts with the DOM. For the latter to work, elements must have unique ids to allow JavaScript to find them. Here's the `$Left` block again, with an id and a couple of other additions:
 ```json
     "$Left": {
         "#debug": 2,
