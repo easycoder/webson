@@ -34,7 +34,7 @@ Here we create a coontainer `<div>` and assign some user values. In most cases h
 
 The line `"$NKeys": 10` simply assigns a value to the variable `$NKeys`, which will be available in this block and in all child blocks of this one.
 
-The line `"$A": "<$NKeys*2>"` performs arithmetic, multiplying the value of `$NKeys` by 2 and putting the result into `$A`. The angle braces perform a vital function here. If they are omitted, the expression is taken to be a literal (a string of characters. With the braces it becomes a numeric expression, to be evaluated immeditately. The JavaScript function `eval()` is used to evaluate the expression, so you can use anything that's legal for that function. Angle braces can be nested to control the precedence of arithmetic operations.
+The line `"$A": "<$NKeys*2>"` performs arithmetic, multiplying the value of `$NKeys` by 2 and putting the result into `$A`. The angle braces perform a vital function here. If they are omitted, the expression is taken to be a literal (a string of characters. With the braces it becomes a numeric expression, to be evaluated immeditately. The JavaScript function `eval()` is used to evaluate the expression, so you can use anything that's legal for that function. Angle braces can be nested; the innermost ones are evaluated first.
 
 The line `"padding": "<#parent_width/50>px"`  evaluates the expression then tacks `px` on the end. Sometimes it's necessary to use braces when no arithmetic operation can be performed, to prevent a suffix like `px` being taken as part of a variable name. The `eval()` function will probably throw an error, but Webson catches it and simply expands any variables present, replacing their names with their values.
 

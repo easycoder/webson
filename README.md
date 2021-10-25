@@ -189,7 +189,7 @@ To achieve this we can rewrite the last part of the script as follows:
 ```
 Here I've left out the block for `$Center` as it's unchanged. Both `$Left` and `$Right` now no longer declare their own `#element`; instead they set up user-defined variables `$ID`, `$Width` and `$Color` and invoke `$LRPanel` to construct the element. I suggest using an initial capital letter for each variable name, to make them easier to spot, but it's not mandatory. Any variable declared or modified at a given level in the structure will be visible at all points beneath that one, but changes do not propagate upwards.
 
-`$LRPanel` creates a `div`, applies padding to it and creates an inner `div` called `$LRSubPanel`. Note how the `$Color` variable is passed down and used here, resulting in a colored panel with a white border. Note also the use of `calc()` in `$LRPanel` to allow for the padding, which in a conformant browser adds to the height of the element. This also neatly introduces another powerful feature of Webson; the ability to put user variables into expressions.
+`$LRPanel` creates a `div`, applies padding to it and creates an inner `div` called `$LRSubPanel`. Note how the `$Color` variable is passed down and used here, resulting in a colored panel with a white border. Note also the use of `calc()` in `$LRPanel` to allow for the padding, which in a conformant browser adds to the height of the element.
 
 ## The HTML
 To view this demo on a PC, place the following HTML file on your server:
@@ -219,6 +219,6 @@ To view this demo on a PC, place the following HTML file on your server:
   </body>
 </html>
 ```
-For mobile, the width and height can both be set to `100%`. The JSON script is assumed to be in a folder on your server at `(your domain)/resources/json/simple.json`. The code above uses the relatively-new standard function `fetch()` to get the named script from a file on the server. It then calls `render()` in the Webson package to create the DOM tree that corresponds to the JSON script.
+For mobile, the width and height can both be set to `` `100%` ``. The JSON script is assumed to be in a folder on your server at `(your domain)/resources/json/simple.json`. The code above uses the relatively-new standard function `fetch()` to get the named script from a file on the server. It then calls `render()` in the Webson package to create the DOM tree that corresponds to the JSON script.
 
 [Next: A more complex example](keyboard.md)
