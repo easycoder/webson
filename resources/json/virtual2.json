@@ -236,35 +236,47 @@
             "$Content": "?123",
             "$Href": "123",
             "$FontSize": "<$ButtonSize*0.4>",
-            "#onClick": {
-                "default": "symbols",
-                "shifted": "symbols",
-                "symbols": "default",
-                "shifted symbols": "symbols"
-            },
-            "#switch": {
-                "default": "$Default",
-                "shifted": "$Shifted",
-                "symbols": "$Symbols",
-                "shifted symbols": "$Shifted_Symbols"
-            },
+            "#": "$?123Button",
+
+            "$?123Button": {
+                "#doc": "This is the outer container for the ?123 button",
+                "#element": "div",
+                "position": "relative",
+                "display": "inline-block",
+                "width": "<$Width>px",
+                "height": "<$ButtonSize>px",
+                "margin": "<$Gap>px",
+                "border-radius": "$ButtonRadius",
+                "#onClick": {
+                    "default": "symbols",
+                    "shifted": "symbols",
+                    "symbols": "default",
+                    "shifted symbols": "symbols"
+                },
+                "#switch": {
+                    "default": "$Default",
+                    "shifted": "$Shifted",
+                    "symbols": "$Symbols",
+                    "shifted symbols": "$Shifted_Symbols"
+                },
             
-            "$Default": {
-                "#": "$Button"
-            },
-            
-            "$Shifted": {
-                "#": "$Button"
-            },
-            
-            "$Symbols": {
-                "$ButtonBackground": "#8c8",
-                "#": "$Button"
-            },
-            
-            "$Shifted_Symbols": {
-                "$ButtonBackground": "#cc8",
-                "#": "$Button"
+                "$Default": {
+                    "#": "$ButtonInner"
+                },
+                
+                "$Shifted": {
+                    "#": "$ButtonInner"
+                },
+                
+                "$Symbols": {
+                    "$ButtonBackground": "#8c8",
+                    "#": "$ButtonInner"
+                },
+                
+                "$Shifted_Symbols": {
+                    "$ButtonBackground": "#cc8",
+                    "#": "$ButtonInner"
+                }
             }
         },
         
