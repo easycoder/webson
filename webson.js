@@ -173,12 +173,12 @@ const Webson = {
             if (symbols[`#debug`] >= 2) {
                 console.log(`#element: ${elementType}`);
             }
-            if ([`div`, `span`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `br`, `a`,
-                `input`, `select`, `ol`, `ul`, `list`, `listitem`,]
-                .includes(elementType)) {
+//             if ([`div`, `span`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `br`, `a`,
+//                 `input`, `select`, `ol`, `ul`, `list`, `listitem`,]
+//                 .includes(elementType)) {
                 element = document.createElement(elementType);
                 parent.appendChild(element);
-            }
+//             }
         }
         symbols[`#element`] = element;
         // Do the main operations
@@ -191,6 +191,7 @@ const Webson = {
                 case `#element`:
                     break;
                 case `#content`:
+                    // Handle the content of the element
                     const val = Webson.expand(element, value, symbols);
                     if (symbols[`#debug`] >= 2) {
                         console.log(`#content: ${value} -> ${val}`);
@@ -209,6 +210,7 @@ const Webson = {
                     }
                     break;
                 case `#repeat`:
+                    // Implement a repeat directive
                     symbols[`#steps`] = 0;
                     for (let item in value) {
                         switch (item) {
@@ -245,6 +247,7 @@ const Webson = {
                     }
                     break;
                 case `#include`:
+                    // Include another Webson script
                     if (Array.isArray(value)) {
                         for (item of value) {
                             const defs = Object.keys(item);
@@ -260,6 +263,7 @@ const Webson = {
                     }
                     break;
                 case `#switch`:
+                    // Implement a switch
                     const keys = Object.keys(value);
                     for (let state of keys) {
                         if (state === symbols[`#state`]) {
@@ -270,6 +274,7 @@ const Webson = {
                     Webson.build(element, name, symbols[value[`default`]], symbols);
                     break;
                 case `#onClick`:
+                    // Handle a click on the element
                     element.onClickItems = value;
                     element.onclick = function (event) {
                         event.stopPropagation();

@@ -124,34 +124,34 @@
         "height": "<$Height>px",
         "$Row": 2,
         "#switch": {
-            "default": "$Row2_default",
-            "shifted": "$Row2_shifted",
-            "symbols": "$Row2_symbols",
-            "shifted symbols": "$Row2_shifted_symbols"
+            "default": "$Default",
+            "shifted": "$Shifted",
+            "symbols": "$Symbols",
+            "shifted symbols": "$Shifted_symbols"
         },
         
-        "$Row2_default": {
+        "$Default": {
             "$RowLabels": [
                 "z", "x", "c", "v", "b", "n", "m"
             ],
             "#": ["$Shift", "$Buttons", "$Backspace"]
         },
         
-        "$Row2_shifted": {
+        "$Shifted": {
             "$RowLabels": [
                 "Z", "X", "C", "V", "B", "N", "M"
             ],
             "#": ["$Shift", "$Buttons", "$Backspace"]
         },
         
-        "$Row2_symbols": {
+        "$Symbols": {
             "$RowLabels": [
                 "*", "\"", "'", ":", ";", "!", "?"
             ],
             "#": ["$Shift", "$Buttons", "$Backspace"]
         },
         
-        "$Row2_shifted_symbols": {
+        "$Shifted_symbols": {
             "$RowLabels": [
                 "%", "©", "®", "™", "§", "[", "]"
             ],
@@ -165,35 +165,47 @@
             "$Content": "Shift",
             "$Href": "#",
             "$FontSize": "<$ButtonSize*0.4>",
-            "#switch": {
-                "default": "$Default",
-                "shifted": "$Shifted",
-                "symbols": "$Symbols",
-                "shifted symbols": "$Shifted_Symbols"
-            },
-            "#onClick": {
-                "default": "shifted",
-                "shifted": "default",
-                "symbols": "shifted symbols",
-                "shifted symbols": "symbols"
-            },
-            
-            "$Default": {
-                "#": "$Button"
-            },
-            
-            "$Shifted": {
-                "$ButtonBackground": "#c88",
-                "#": "$Button"
-            },
-            
-            "$Symbols": {
-                "#": "$Button"
-            },
-            
-            "$Shifted_Symbols": {
-                "$ButtonBackground": "#c88",
-                "#": "$Button"
+            "#": "$ShiftButton",
+
+            "$ShiftButton": {
+                "#doc": "This is the outer container for the Shift button",
+                "#element": "div",
+                "position": "relative",
+                "display": "inline-block",
+                "width": "<$Width>px",
+                "height": "<$ButtonSize>px",
+                "margin": "<$Gap>px",
+                "border-radius": "$ButtonRadius",
+                "#onClick": {
+                    "default": "shifted",
+                    "shifted": "default",
+                    "symbols": "shifted symbols",
+                    "shifted symbols": "symbols"
+                },
+                "#switch": {
+                    "default": "$Default",
+                    "shifted": "$Shifted",
+                    "symbols": "$Symbols",
+                    "shifted symbols": "$Shifted_Symbols"
+                },
+                
+                "$Default": {
+                    "#": "$ButtonInner"
+                },
+                
+                "$Shifted": {
+                    "$ButtonBackground": "#c88",
+                    "#": "$ButtonInner"
+                },
+                
+                "$Symbols": {
+                    "#": "$ButtonInner"
+                },
+                
+                "$Shifted_Symbols": {
+                    "$ButtonBackground": "#c88",
+                    "#": "$ButtonInner"
+                }
             }
         },
 
@@ -224,17 +236,17 @@
             "$Content": "?123",
             "$Href": "123",
             "$FontSize": "<$ButtonSize*0.4>",
-            "#switch": {
-                "default": "$Default",
-                "shifted": "$Shifted",
-                "symbols": "$Symbols",
-                "shifted symbols": "$Shifted_Symbols"
-            },
             "#onClick": {
                 "default": "symbols",
                 "shifted": "symbols",
                 "symbols": "default",
                 "shifted symbols": "symbols"
+            },
+            "#switch": {
+                "default": "$Default",
+                "shifted": "$Shifted",
+                "symbols": "$Symbols",
+                "shifted symbols": "$Shifted_Symbols"
             },
             
             "$Default": {
@@ -296,7 +308,7 @@
             "#": "$Button"
         }
     },
-    
+
     "$Buttons": {
         "#repeat": {
             "#doc": "This repeats a row of keys",
@@ -304,19 +316,19 @@
             "#steps": {
                 "#arraysize": "$RowLabels"
             }
-        },
-        
-        "$StandardButton": {
-            "#doc": "This is a standard key",
-            "$ID": "r$Row-$Content",
-            "$Width": "$ButtonSize",
-            "$FontSize": "$ButtonSize*0.5",
-            "$Content": {
-                "#select": "$RowLabels",
-                "#index": "#step"
-            },
-            "#": "$Button"
         }
+    },
+
+    "$StandardButton": {
+        "#doc": "This is a standard key",
+        "$ID": "r$Row-$Content",
+        "$Width": "$ButtonSize",
+        "$FontSize": "$ButtonSize*0.5",
+        "$Content": {
+            "#select": "$RowLabels",
+            "#index": "#step"
+        },
+        "#": "$Button"
     },
 
     "$Button": {
@@ -328,35 +340,36 @@
         "height": "<$ButtonSize>px",
         "margin": "<$Gap>px",
         "border-radius": "$ButtonRadius",
-        "#": "$ButtonInner",
+        "#": "$ButtonInner"
+    },
 
-        "$ButtonInner": {
-            "#doc": "This is the button inner container",
-            "#element": "div",
-            "position": "relative",
-            "width": "<$Width-$ButtonSize/10>",
-            "height": "90%",
-            "top": "10%",
-            "border-radius": "<$ButtonRadius>px",
-            "background": "$ButtonBackground",
-            "#": "$ButtonFace"
-        },
-        
-        "$ButtonFace": {
-            "#doc": "This is the actual button face",
-            "#element": "a",
-            "@id": "id-$ID",
-            "display": "block",
-            "position": "absolute",
-            "width": "100%",
-            "top": "<$ButtonSize*0.7-$FontSize>px",
-            "color": "white",
-            "font-family": "Arial, Helvetica, sans-serif",
-            "font-size": "<$FontSize>px",
-            "font-weight": "bold",
-            "text-decoration": "none",
-            "@href": "https://test.com?key=$Content",
-            "#content": "$Content"
-        }
+    "$ButtonInner": {
+        "#doc": "This is a button inner container",
+        "#element": "div",
+        "position": "relative",
+        "width": "<$Width-$ButtonSize/10>",
+        "height": "90%",
+        "top": "10%",
+        "border-radius": "<$ButtonRadius>px",
+        "background": "$ButtonBackground",
+        "#": "$ButtonFace"
+    },
+    
+    "$ButtonFace": {
+        "#doc": "This is the actual button face",
+        "#element": "a",
+        "@id": "id-$ID",
+        "display": "block",
+        "position": "absolute",
+        "width": "100%",
+        "top": "<$ButtonSize*0.7-$FontSize>px",
+        "color": "white",
+        "font-family": "Arial, Helvetica, sans-serif",
+        "font-size": "<$FontSize>px",
+        "font-weight": "bold",
+        "text-decoration": "none",
+        "@href": "#",
+        "@onClick": "alert('Click on $Content')",
+        "#content": "$Content"
     }
 }
