@@ -1,6 +1,6 @@
 # A more complex example
 
-The example given previously is a simple one. As noted at the start, it offers few advantages over hand-coding in HTML as it doubles the size of the markup and requires another 13k or so of JavaScript to do its job. So here we'll look at a more complex example; one that is highly tedious to code in HTML. Here's a screenshot:
+The example given previously is a simple one. As noted at the start, it offers few advantages over hand-coding in HTML as it doubles the size of the markup and requires another 14k or so of JavaScript to do its job. So here we'll look at a more complex example; one that is highly tedious to code in HTML. Here's a screenshot:
 
 ![Example](/resources/img/keyboard.png)
 
@@ -30,7 +30,7 @@ which allows us to set styles on the parent container, but here does nothing exc
         "#": "$Rows"
     },
 ```
-Here we create a coontainer `<div>` and assign some user values. In most cases here we're doing arithmetic to establish the sizes of objects in the design.
+Here we create a container `<div>` and assign some user values. In most cases here we're doing arithmetic to establish the sizes of objects in the design.
 
 The line `"$NKeys": 10` simply assigns a value to the variable `$NKeys`, which will be available in this block and in all child blocks of this one.
 

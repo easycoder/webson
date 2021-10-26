@@ -76,7 +76,7 @@ Each of the rows of the keyboard now has 4 sets of labels. To choose which one t
         }
     },
 ```
-This is somewhat larger than the previous version but there's not much that's actually new. The main thing is the `#switch` diretive replacing the original `#` item. It comprises a set of properties, one for each of the values that will be expected for the state variable. The values of each of these properties is the name of a user-defined variable. These are defined inside the `$Row0` structure in order to keep them private and allow their names to be reused by other rows. Each of the switch cases defines a set of row labels as before and calls `$Buttons` to display them.
+This is somewhat larger than the previous version but there's not much that's actually new. The main thing is the `#switch` directive replacing the original `#` item. It comprises a set of properties, one for each of the values that will be expected for the state variable. The values of each of these properties is the name of a user-defined variable. These are defined inside the `$Row0` structure in order to keep them private and allow their names to be reused by other rows. Each of the switch cases defines a set of row labels as before and calls `$Buttons` to display them.
 
 The other rows are very similar; you can see the source code in the [repository](github.com/easycoder/webson) as `resources/json/virtual2.json`.
 
