@@ -369,7 +369,7 @@
         "font-weight": "bold",
         "text-decoration": "none",
         "@href": "#",
-        "@onClick": "alert('Click on $Content')",
+        "@onClick": "console.log('Click on $Content')",
         "#content": "$Content"
     }
 }
