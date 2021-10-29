@@ -76,11 +76,11 @@ Each of the rows of the keyboard now has 4 sets of labels. To choose which one t
         }
     },
 ```
-This is somewhat larger than the previous version but there's not much that's actually new. The main thing is the `#switch` directive replacing the original `#` item. It comprises a set of properties, one for each of the values that will be expected for the state variable. The values of each of these properties is the name of a user-defined variable. These are defined inside the `$Row0` structure in order to keep them private and allow their names to be reused by other rows. Each of the switch cases defines a set of row labels as before and calls `$Buttons` to display them.
+This is somewhat larger than the previous version but there's not much that's actually new. The main thing is the `#switch` directive replacing the original `#` item. It comprises a set of properties, one for each of the values that will be expected for the state variable. The values of each of these properties is the name of a user-defined variable. These are defined inside the `$Row<N>` structures in order to keep them private and allow their names to be reused by several rows. Each of the switch cases defines a set of row labels as before and calls `$Buttons` to display them.
 
 The other rows are very similar; you can see the source code in the [repository](github.com/easycoder/webson) as `resources/json/virtual2.json`.
 
-The third and fourth rows contain the Shift and Symbol buttons, so here's the new code for the `Shift` button:
+The third and fourth rows contain the Shift and Symbol buttons. Here's the new code for the `Shift` button:
 ```json
         "$Shift": {
             "#doc": "This is the Shift key",
@@ -133,11 +133,11 @@ The third and fourth rows contain the Shift and Symbol buttons, so here's the ne
             }
         },
 ```
-The magic is done by the `#onClick` directive. When the key is clicked, Webson examines the current status to see what the new status should be. It sets the internal status variable to that value then reloads the entire structure. The 2 shifted states each have their own background colors to override the previous values.
+The magic is done by the `#onClick` directive. When the key is clicked, Webson examines the current status to see what the new status should be. It sets the internal status variable to that value then reloads the entire structure. The 2 shifted states each have their own background colors to override the previous values. Note that the `#onClick` directive must be defined in the block that contains the element it applies to.
 
 Much the same is done for the `?123` key in the third row; see the full listing in the repository.
 
-This is the end of the Webson documentation for the time being. It's likely that further feature may be added to Webson, but we'll be sure to document them fully if that happens.
+This is the end of the Webson documentation for the time being. It's likely that further features may be added to Webson, but we'll be sure to document them fully if that happens.
 
 Feedback is welcome, as are suggestions for improvements. I hope some will find Webson useful.
 
