@@ -1,88 +1,3 @@
-const EasyCoder_Webson = {
-
-	name: `EasyCoder_Webson`,
-
-	Render: {
-        // render Script in Parent
-
-		compile: compiler => {
-			const lino = compiler.getLino();
-            const script = compiler.getNextValue();
-            if (compiler.tokenIs(`in`)) {
-                if (compiler.nextIsSymbol()) {
-                    const parentRecord = compiler.getSymbolRecord();
-                    if (parentRecord.extra === `dom`) {
-                        compiler.next();
-                        compiler.addCommand({
-                            domain: `webson`,
-                            keyword: `render`,
-                            lino,
-                            parent: parentRecord.name,
-                            script
-                        });
-                        return true;
-                    }
-                }
-			}
-			return false;
-		},
-
-		run: program => {
-			const command = program[program.pc];
-			const parent = program.getSymbolRecord(command.parent);
-            const element = parent.element[parent.index];
-            const script = program.getValue(command.script);
-            Webson.render(element, `main`, script);
-			return command.pc + 1;
-		}
-	},
-
-	// Values
-	value: {
-
-		compile: compiler => {
-            return null;
-		},
-
-		get: (program, value) => {
-			return null;
-		}
-	},
-
-	// Conditions
-	condition: {
-
-		compile: compiler => {
-		},
-
-		test: (program, condition) => {
-            return false;
-        }
-    },
-
-	// Dispatcher
-	getHandler: name => {
-		switch (name) {
-            case `render`:
-                return EasyCoder_Webson.Render;
-            default:
-                return false;
-		}
-	},
-
-	run: program => {
-		const command = program[program.pc];
-		const handler = EasyCoder_Webson.getHandler(command.keyword);
-		if (!handler) {
-			program.runtimeError(command.lino, `Unknown keyword '${command.keyword}' in 'dom' package`);
-		}
-		return handler.run(program);
-	}
-};
-
-// eslint-disable-next-line no-unused-vars
-EasyCoder.domain.webson = EasyCoder_Webson;
-
 // Webson is a rendering engine for JSON-based markup scripts.
     
     const Webson = {
@@ -419,8 +334,94 @@ EasyCoder.domain.webson = EasyCoder_Webson;
         Webson.name = name;
         Webson.script = JSON.parse(script);
         Webson.build(parent, name, Webson.script, {
-            "#debug": 0,
+            "#debug": 2,
             "#state": "default"
         });
     }
 };
+
+// The EasyCoder plugin
+const EasyCoder_Webson = {
+
+	name: `EasyCoder_Webson`,
+
+	Render: {
+        // render Script in Parent
+
+		compile: compiler => {
+			const lino = compiler.getLino();
+            const script = compiler.getNextValue();
+            if (compiler.tokenIs(`in`)) {
+                if (compiler.nextIsSymbol()) {
+                    const parentRecord = compiler.getSymbolRecord();
+                    if (parentRecord.extra === `dom`) {
+                        compiler.next();
+                        compiler.addCommand({
+                            domain: `webson`,
+                            keyword: `render`,
+                            lino,
+                            parent: parentRecord.name,
+                            script
+                        });
+                        return true;
+                    }
+                }
+			}
+			return false;
+		},
+
+		run: program => {
+			const command = program[program.pc];
+			const parent = program.getSymbolRecord(command.parent);
+            const element = parent.element[parent.index];
+            const script = program.getValue(command.script);
+            Webson.render(element, `main`, script);
+			return command.pc + 1;
+		}
+	},
+
+	// Values
+	value: {
+
+		compile: compiler => {
+            return null;
+		},
+
+		get: (program, value) => {
+			return null;
+		}
+	},
+
+	// Conditions
+	condition: {
+
+		compile: compiler => {
+		},
+
+		test: (program, condition) => {
+            return false;
+        }
+    },
+
+	// Dispatcher
+	getHandler: name => {
+		switch (name) {
+            case `render`:
+                return EasyCoder_Webson.Render;
+            default:
+                return false;
+		}
+	},
+
+	run: program => {
+		const command = program[program.pc];
+		const handler = EasyCoder_Webson.getHandler(command.keyword);
+		if (!handler) {
+			program.runtimeError(command.lino, `Unknown keyword '${command.keyword}' in 'dom' package`);
+		}
+		return handler.run(program);
+	}
+};
+
+// eslint-disable-next-line no-unused-vars
+EasyCoder.domain.webson = EasyCoder_Webson;
