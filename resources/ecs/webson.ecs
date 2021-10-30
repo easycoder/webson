@@ -1,0 +1,43 @@
+!	Webson Designer
+
+	script Test
+    
+    div Body
+    div Left
+    div Right
+    button Open
+    button Save
+    button Delete
+    select UL0
+    variable Mobile
+    variable Script
+    variable Keys
+    
+    clear Mobile
+    if mobile
+        if portrait set Mobile
+!   set Mobile
+
+	create Body
+    set style `width` of Body to `100%`
+    
+    rest get Script from `/resources/json/webson.json?v=` cat now
+    
+    render Script in Body
+    attach Left to `left`
+    attach Right to `right`
+
+    attach Open to `Open`
+    attach Save to `Save`
+    attach Delete to `Delete`
+    attach UL0 to `List0`
+    
+    on click Open
+    begin
+    	rest get Script from `/resources/json/left.json?v=` cat now
+        put the json keys of Script into Keys
+        set UL0 from Keys
+        set the content of Left to Keys
+    end
+    
+    stop
