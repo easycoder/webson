@@ -334,7 +334,7 @@
         Webson.name = name;
         Webson.script = JSON.parse(script);
         Webson.build(parent, name, Webson.script, {
-            "#debug": 2,
+            "#debug": 0,
             "#state": "default"
         });
     }
@@ -423,5 +423,6 @@ const EasyCoder_Webson = {
 	}
 };
 
-// eslint-disable-next-line no-unused-vars
-EasyCoder.domain.webson = EasyCoder_Webson;
+if (typeof EasyCoder !== `undefined`) {
+    EasyCoder.domain.webson = EasyCoder_Webson;
+}

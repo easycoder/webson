@@ -3,21 +3,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webson demo</title>
-    <script type='text/javascript' src='https://webson.netlify.app/webson.js'></script>
+    <script type='text/javascript' src='https://webson.netlify.app/resources/plugins/webson.js'></script>
   </head>
 
   <body>
+    <div id="main" style="width:640px"></div>
     <script>
-        const element = document.createElement(`div`);
-        element.style.width = `640px`;
-        element.style.height = `480px`;
-        render(`resources/json/virtual2.json`);
+        window.onload = function() {
+            render(`resources/json/virtual2.json`);
 
-        async function render(file) {
-            const response = await fetch(file);
-            const script = await response.text();
-            Webson.render(element, `keyboard`, script);
-            document.body.appendChild(element);
+            async function render(file) {
+                const response = await fetch(file);
+                const script = await response.text();
+                Webson.render(document.getElementById("main"), `keyboard`, script);
+            }
         }
     </script>
   </body>
