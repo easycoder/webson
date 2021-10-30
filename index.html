@@ -2,24 +2,20 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webson demo</title>
-    <script type='text/javascript' src='https://webson.netlify.app/webson.js'></script>
+    <title></title>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/easycoder/easycoder.github.io/dist/easycoder.js?v=2.7.8'></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/easycoder/easycoder.github.io/dist/plugins/webson.js?v=2.7.8'></script>
   </head>
 
-  <body>
-    <script>
-        window.onload = function() {
-            const element = document.createElement(`div`);
-            element.style.width = `640px`;
-            document.body.appendChild(element);
-            render(element, `resources/json/virtual2.json`);
-        };
-        
-        async function render(element, file) {
-            const response = await fetch(file);
-            const script = await response.text();
-            Webson.render(element, `virtual2`, script);
-        }
-    </script>
-  </body>
+<body>
+    <pre id="easycoder-script" style="display:none">
+    !	EasyCoder Script Editor
+
+        script Loader
+
+        variable Script
+        rest get Script from `/resources/ecs/webson.ecs`
+        run Script
+    </pre>
+</body>
 </html>
