@@ -1,0 +1,69 @@
+{
+    "#doc": "This is the main container structure for the PC version",
+    "display": "flex",
+    "flex-direction": "column",
+    "#": ["$Header", "$Main"],
+    
+    "$Header": {
+        "#element": "div",
+        "width": "100%",
+        "height": "auto",
+        "margin-bottom": "0.5em",
+        "#": "$Inner",
+        
+        "$Inner": {
+            "#element": "div",
+            "border": "1px solid #337fda",
+            "padding": "0.2em",
+            "text-align": "center",
+            "font-size": "4em",
+            "font-weight": "bold",
+            "color": "#337fda",
+            "#content": "Webson Designer (under development)"
+        }
+    },
+    
+    "$Main": {
+        "#element": "div",
+        "width": "100%",
+        "flex": 1,
+        "display": "flex",
+        "flex-direction": "row",
+        "#": ["$Left", "$Gap", "$Right"],
+    
+        "$Left": {
+            "#element": "div",
+            "display": "inline-block",
+            "flex": 1,
+            "#": "$Inner",
+        
+            "$Inner": {
+                "#element": "div",
+                "border": "1px solid #337fda",
+                "padding": "0.5em",
+                "#include": "resources/json/left.json"
+            }
+        },
+        
+        "$Gap": {
+            "#element": "div",
+            "display": "inline-block",
+            "width": "0.5em"
+        },
+        
+        "$Right": {
+            "#element": "div",
+            "display": "inline-block",
+            "flex": 1,
+            "#": "$Inner",
+        
+            "$Inner": {
+                "#element": "div",
+                "@id": "right",
+                "border": "1px solid #337fda",
+                "padding": "0.5em",
+                "#include": "resources/json/right.json"
+            }
+        }
+    }
+}

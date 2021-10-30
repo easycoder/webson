@@ -1,0 +1,56 @@
+{
+    "#": ["$Buttons", "$Lists", "$Text"],
+    
+    "$Buttons": {
+        "#element": "div",
+        "text-align": "center",
+        "margin-bottom": "0.5em",
+        "$NButtons": 4,
+        "#": [
+            "$Open",
+            "$Save",
+            "$Delete",
+            "$Refresh"
+        ],
+        
+        "$Open": {
+            "$Content": "Open",
+            "#": "$Button"
+        },
+        
+        "$Save": {
+            "$Content": "Save",
+            "#": "$Button"
+        },
+        
+        "$Delete": {
+            "$Content": "Delete",
+            "#": "$Button"
+        },
+        
+        "$Refresh": {
+            "$Content": "Refresh",
+            "#": "$Button"
+        },
+        
+        "$Button": {
+            "#element": "button",
+            "@id": "$Content",
+            "@type": "button",
+            "#content": "$Content",
+            "width": "calc(<#parent_width/$NButtons>px - 0.5em - 1px)",
+            "margin": "0 0.25em 0 0.25em"
+        }
+    },
+    
+    "$Lists": {
+        "#element": "select",
+        "@id": "List0"
+    },
+    
+    "$Text": {
+        "#element": "div",
+        "@id": "left",
+        "margin-top": "0.5em"
+    }
+}
