@@ -1,5 +1,5 @@
 ## Synopsis
-Webson is an easy-to-use JSON syntax for representing DOM elements, enabling entire web pages to be described without any HTML. It includes a JavaScript runtime engine to build pages in the browser. It has a number of key features such as variables and repeat blocks, that avoid the repetition found in large HTML scripts.
+Webson is an easy-to-use JSON syntax for representing DOM elements, enabling entire web pages to be described without any HTML. It has a number of key features such as variables and repeat blocks to avoid the repetition found in large HTML scripts, and includes a JavaScript runtime engine to build pages in the browser.
   
 ## Introduction
 A web page is the visual representation of a Document Object Model, or DOM, the data structure maintained internally by all browsers. Traditionally, the DOM is constructed by the browser from HTML scripts, but as pages get bigger and more complex HTML becomes ever more cumbersome. In recent years it has become increasingly common to create the DOM using JavaScript, with no HTML ever being seen, but while this suits programmers well it requires a different skill set from that needed to build pages the traditional way.

@@ -218,11 +218,21 @@
                                 break;
                             case `#steps`:
                                 const stepspec = value[item];
+                                let name;
                                 for (let stepitem in stepspec) {
                                     switch (stepitem) {
                                         case `#arraysize`:
-                                            const name = stepspec[stepitem];
+                                            name = stepspec[stepitem];
                                             symbols[`#steps`] = symbols[name].length;
+                                            break;
+                                        case `#contentof`:
+                                            name = stepspec[stepitem];
+                                            const it = symbols[name];
+                                            const id = it[`@id`];
+                                            if (typeof id !== `undefined`) {
+                                                symbols[`#steps`] =
+                                                    document.getElementById(id).innerHTML;
+                                            }
                                             break;
                                         default:
                                             break;

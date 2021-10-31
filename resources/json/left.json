@@ -1,17 +1,29 @@
 {
-    "#": ["$Buttons", "$Lists", "$Text"],
+    "#": ["$Buttons", "$Left"],
     
     "$Buttons": {
         "#element": "div",
         "text-align": "center",
         "margin-bottom": "0.5em",
-        "$NButtons": 4,
+        "$NButtons": 6,
         "#": [
+            "$Import",
+            "$Export",
             "$Open",
             "$Save",
             "$Delete",
             "$Refresh"
         ],
+        
+        "$Import": {
+            "$Content": "Import",
+            "#": "$Button"
+        },
+        
+        "$Export": {
+            "$Content": "Export",
+            "#": "$Button"
+        },
         
         "$Open": {
             "$Content": "Open",
@@ -43,14 +55,18 @@
         }
     },
     
-    "$Lists": {
-        "#element": "select",
-        "@id": "List0"
-    },
-    
-    "$Text": {
+    "$Left": {
         "#element": "div",
-        "@id": "left",
-        "margin-top": "0.5em"
+        "margin-top": "0.5em",
+        
+        "#": "$Structure",
+        
+        "$Structure": {
+            "#element": "div",
+            "@id": "left",
+            "width": "100%",
+            "#include": "resources/json/structure.json"
+        }
+        
     }
 }
