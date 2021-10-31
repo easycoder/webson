@@ -10,8 +10,8 @@ HTML is not program code; it's a form of "markup", the ultimate expression of wh
 
 Since HTML shares many of the disadvantages of XML, the question might be asked, _Can JSON also replace HTML?_. If the answer is "yes", a couple of supplementary questions might be
 
- _Can we have user-defined variables and reusable blocks?_ 
- _How about conditional structures?_
+_Can we have user-defined variables and reusable blocks?_    
+_How about conditional structures?_
 
 which would greatly reduce the amount of markup needed to describe a complex web page, where items are commonly repeated with only minor differences.
 
