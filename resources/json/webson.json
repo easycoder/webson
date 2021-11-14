@@ -1,5 +1,6 @@
 {
     "#doc": "This is the main container structure for the PC version",
+    "font-size": "13px",
     "display": "flex",
     "flex-direction": "column",
     "#": ["$Header", "$Main"],
@@ -17,7 +18,7 @@
             "border": "1px solid #337fda",
             "padding": "0.2em",
             "text-align": "center",
-            "font-size": "4em",
+            "font-size": "300%",
             "font-weight": "bold",
             "color": "#337fda",
             "#content": "Webson Designer (under development)"
@@ -37,7 +38,7 @@
             "#doc": "The left-hand panel",
             "#element": "div",
             "display": "inline-block",
-            "flex": 1,
+            "width": "50%",
             "#": "$Inner",
         
             "$Inner": {
@@ -65,8 +66,7 @@
                 "#element": "div",
                 "@id": "right",
                 "border": "1px solid #337fda",
-                "padding": "0.5em",
-                "#include": "resources/json/right.json"
+                "padding": "0.5em"
             }
         }
     }

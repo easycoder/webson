@@ -1,29 +1,114 @@
 {
-    "#doc": "properties.json",
+    "#doc": "properties.json - a single column of properties",
+    "$NKeys": {
+        "#arraysize": "$Keys"
+    },
     "#element": "div",
+    "@id": "<$LevelNumber>-level",
+    "width": "12em",
     "display": "flex",
     "flex-direction": "column",
-    "width": "10em",
-    "background": "pink",
+    "#": ["$Title", "$InnerPanel"],
 
-    "#repeat": {
-        "#doc": "This repeats an item vertically",
-        "#target": "$Name",
-        "#steps": {
-            "#arraysize": "$Properties"
-        }
+    "$Title": {
+        "#element": "div",
+        "#content": "Level $LevelNumber",
+        "text-align": "center",
+        "font-size": "1em",
+        "font-weight": "bold",
+        "width": "11em",
+        "margin-bottom": "0.25em"
     },
-    
-    "$Name": {
-        "#element": "button",
-        "@type": "button",
-        "@id": "0-#step",
-        "flex": 1,
-        "width": "100%",
-        "margin-bottom": "0.25em",
-        "#content": {
-            "#select": "$Properties",
-            "#index": "#step"
+
+    "$InnerPanel": {
+        "#element": "div",
+        "display": "flex",
+        "flex-direction": "row",
+        "#": "$Props",
+        
+        "$Props": {
+            "#element": "div",
+            "position": "relative",
+            "display": "flex",
+            "flex-direction": "column",
+            "flex": "1",
+            "#": ["$Vertical", "$Vertical2", "$List"],
+            
+            "$Vertical": {
+                "#doc": "The vertical bar that joins all the properties",
+                "#element": "div",
+                "@id": "$LevelNumber-vertical",
+                "display": "inline-block",
+                "position": "absolute",
+                "top": "0.9em",
+                "width": "0.25em",
+                "height": "<<$NKeys - 1> * 2.25 + 0.7>em",
+                "background": "gray"
+            },
+            
+            "$Vertical2": {
+                "#doc": "The vertical bar that joins to the selected property",
+                "#element": "div",
+                "@id": "$LevelNumber-vertical2",
+                "display": "inline-block",
+                "position": "absolute",
+                "top": "0.9em",
+                "width": "0.25em",
+                "height": "<$Selected * 2.25 + 0.7>em",
+                "background": "gray"
+            },
+                    
+            "$List": {
+                "#debug": 2,
+                "#repeat": {
+                    "#doc": "This repeats an item vertically",
+                    "#target": "$Item",
+                    "#steps": "$NKeys"
+                },
+                
+                "$Item": {
+                    "#element": "div",
+                    "display": "flex",
+                    "flex-direction": "row",
+                    "margin-bottom": "0.25em",
+                    "$ButtonLabel": {
+                        "#select": "$Keys",
+                        "#index": "#step"
+                    },
+                    "#": ["$LDash", "$Name", "$RDash"],
+            
+                    "$LDash": {
+                        "$ID": "$LevelNumber-#step-ldash",
+                        "$Visibility": "visible",
+                        "#": "$Dash"
+                    },
+                    
+                    "$Name": {
+                        "#element": "button",
+                        "@type": "button",
+                        "@id": "$LevelNumber-#step",
+                        "flex": 1,
+                        "height": "2em",
+                        "#content": "$ButtonLabel"
+                    },
+                    
+                    "$RDash": {
+                        "$ID": "$LevelNumber-#step-rdash",
+                        "$Visibility": "hidden",
+                        "#": "$Dash"
+                    },
+                    
+                    "$Dash": {
+                        "#element": "div",
+                        "@id": "$ID",
+                        "visibility": "$Visibility",
+                        "width": "1em",
+                        "height": "0.2em",
+                        "margin-top": "0.9em",
+                        "background": "gray"
+                    }
+                }
+            }
         }
     }
 }

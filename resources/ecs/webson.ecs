@@ -1,17 +1,40 @@
 !	Webson Designer
 
-	script Test
+	script Designer
     
     div Body
     div Left
     div Right
+    div Vertical
+    div Vertical2
+    div LDash
+    div RDash
+    div Div
+    button Import
+    button Export
     button Open
     button Save
     button Delete
-    select UL0
+    button Refresh
+    button Parse
+    button Property
+    textarea ImportPanel
     variable Mobile
+    variable Webson
     variable Script
     variable Keys
+    variable Properties
+    variable Args
+    variable Level
+    variable N
+    variable M
+    variable L
+    variable K
+    variable Offset
+    variable Content
+    variable SelectionName
+    variable Selected
+    variable ID
     
     clear Mobile
     if mobile
@@ -21,23 +44,192 @@
 	create Body
     set style `width` of Body to `100%`
     
-    rest get Script from `/resources/json/webson.json?v=` cat now
+    rest get Webson from `/resources/json/webson.json?v=` cat now
     
-    render Script in Body
+    render Webson in Body
     attach Left to `left`
     attach Right to `right`
 
+    attach Import to `Import`
+    attach Export to `Export`
     attach Open to `Open`
     attach Save to `Save`
     attach Delete to `Delete`
-    attach UL0 to `List0`
+    attach Refresh to `Refresh`
+    attach Parse to `Parse`
+    attach ImportPanel to `ImportPanel`
+    
+    on click Import
+    begin
+    	print `Import`
+        clear ImportPanel
+        set style `display` of ImportPanel to `block`
+        set style `display` of Parse to `block`
+    end
+    
+    on click Export
+    begin
+    	print `Export`
+    end
     
     on click Open
     begin
-    	rest get Script from `/resources/json/left.json?v=` cat now
-        put the json keys of Script into Keys
-        set UL0 from Keys
-        set the content of Left to Keys
+    	print `Open`
+        put 0 into Level
+        set the elements of Properties to 1
+    	rest get Properties from `/resources/json/virtual2.json?v=` cat now
+        go to Display
     end
     
+    on click Save
+    begin
+    	print `Save`
+    end
+    
+    on click Delete
+    begin
+    	print `Delete`
+    end
+    
+    on click Refresh
+    begin
+    	print `Refresh`
+    end
+    
+    on click Parse go to DoParse
+    
     stop
+    
+DoParse:
+	print `Parse`
+   	clear Right
+    put 0 into Level
+    set the elements of Properties to 1
+   	put the content of ImportPanel into Properties
+
+Display:
+    render Properties in Right
+    set style `display` of ImportPanel to `none`
+    set style `display` of Parse to `none`
+    put 0 into Level
+    clear Left
+
+!	Show all the properties at the current level
+ShowProperties:
+    put the json keys unsorted of Properties into Keys
+    take Offset from Selected giving N
+    
+	rest get Script from `/resources/json/properties.json?v=` cat now
+    set Args to object
+    set property `$Properties` of Args to Properties
+    set property `$Keys` of Args to Keys
+    set property `$LevelNumber` of Args to Level
+    set property `$Selected` of Args to N
+    print Args
+    render Script in Left with Args
+
+    attach Vertical to Level cat `-vertical`
+    attach Vertical2 to Level cat `-vertical2`
+    if Level is 0
+    begin
+        set style `display` of Vertical to `none`
+        set style `display` of Vertical2 to `none`
+    end
+    
+    gosub to GetOffset
+    add the json count of Keys to Offset giving M
+    set the elements of Property to M
+    set the elements of LDash to M
+    set the elements of RDash to M
+
+	! Attach variables to each of the new properties and their accessories
+    put 0 into N
+    put Offset into M
+    while N is less than the json count of Keys
+    begin
+       	index Property to M
+        index LDash to M
+        index RDash to M
+        attach Property to Level cat `-` cat N
+        attach LDash to Level cat `-` cat N cat `-ldash`
+        attach RDash to Level cat `-` cat N cat `-rdash`
+        if Level is 0 set style `display` of LDash to `none`
+     	add 1 to N
+        add 1 to M
+    end
+    on click Property go to OnClickProperty
+	stop
+
+!	Here when a property is clicked
+OnClickProperty:
+  	put the index of Property into Selected
+    put attribute `id` of Property into ID
+    print `Clicked ` cat ID
+    put the content of Property into SelectionName
+    
+    ! Clear things above the level clicked
+	put the position of `-` in ID into M
+    put the value of left M of ID into L
+    while Level is greater than L
+    begin
+    	print `Remove level ` cat Level
+    	attach Div to Level cat `-level`
+    	remove element Div
+        take 1 from Level
+    end
+
+	! Show and hide things
+    gosub to GetOffset
+    index Properties to Level
+	put Offset into M
+    put 0 into N
+    put the json keys of Properties into K
+    while N is less than the json count of K
+    begin
+       	index Property to M
+       	index RDash to M
+        put attribute `id` of Property into ID
+        put the position of `-` in ID into L
+        if Level is the value of left L of ID
+        begin
+        	set style `background` of Property to ``
+        	set style `visibility` of RDash to `hidden`
+        end
+        add 1 to N
+       	add 1 to M
+    end
+    index Property to Selected
+   	set style `background` of Property to `#cfc`
+    index RDash to Selected
+    set style `visibility` of RDash to `visible`
+
+	! If it's a variable and an object, expand it at the next level
+    if character 0 of SelectionName is `$`
+    begin
+		index Properties to Level
+       	put property SelectionName of Properties into Content
+        if Content is an object
+        begin
+            gosub to GetOffset
+        	add 1 to Level
+    		add 1 to Level giving M
+    		set the elements of Properties to M
+    		index Properties to Level
+        	put Content into Properties
+        	go to ShowProperties
+        end
+    end
+	stop
+
+!	Get the offset to the current level
+GetOffset:
+	put 0 into Offset
+    put 0 into L
+    while L is less than Level
+    begin
+    	index Properties to L
+        put the json keys of Properties into K
+        add the json count of K to Offset
+    	add 1 to L
+    end
+	return

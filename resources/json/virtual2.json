@@ -231,7 +231,7 @@
 
         "$?123": {
             "#doc": "This is the ?123 key",
-            "$ID": "123",
+            "$ID": "?123",
             "$Width": "<$ButtonSize*1.5>",
             "$Content": "?123",
             "$Href": "123",
@@ -364,24 +364,24 @@
         "top": "10%",
         "border-radius": "<$ButtonRadius>px",
         "background": "$ButtonBackground",
-        "#": "$ButtonFace"
-    },
+        "#": "$ButtonFace",
     
-    "$ButtonFace": {
-        "#doc": "This is the actual button face",
-        "#element": "a",
-        "@id": "id-$ID",
-        "display": "block",
-        "position": "absolute",
-        "width": "100%",
-        "top": "<$ButtonSize*0.7-$FontSize>px",
-        "color": "white",
-        "font-family": "Arial, Helvetica, sans-serif",
-        "font-size": "<$FontSize>px",
-        "font-weight": "bold",
-        "text-decoration": "none",
-        "@href": "#",
-        "@onClick": "console.log('Click on $Content')",
-        "#content": "$Content"
+        "$ButtonFace": {
+            "#doc": "This is the actual button face",
+            "#element": "a",
+            "@id": "id-$ID",
+            "display": "block",
+            "position": "absolute",
+            "width": "100%",
+            "top": "<$ButtonSize*0.7-$FontSize>px",
+            "color": "white",
+            "font-family": "Arial, Helvetica, sans-serif",
+            "font-size": "<$FontSize>px",
+            "font-weight": "bold",
+            "text-decoration": "none",
+            "@href": "#",
+            "@onClick": "console.log('Click on $Content')",
+            "#content": "$Content"
+        }
     }
 }

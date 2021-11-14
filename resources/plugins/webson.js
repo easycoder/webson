@@ -12,15 +12,31 @@
         if (typeof input === `object`) {
             const keys = Object.keys(input);
             for (let key of keys) {
+                const value = input[key];
                 switch (key) {
                     case `#select`:
                         // Process an array selector
-                        const value = Webson.expand(element, input[key], symbols);
+                        const val = Webson.expand(element, value, symbols);
                         const index = input[`#index`];
                         if (typeof index === `undefined`) {
                             throw Error(`#select '${input[key]} has no #index`);
                         }
-                        output = value[Webson.expand(element, index, symbols)];
+                        output = val[Webson.expand(element, index, symbols)];
+                        mod = true;
+                        changed = true;
+                        break;
+                    case `#arraysize`:
+                        output = symbols[value].length;
+                        mod = true;
+                        changed = true;
+                        break;
+                    case `#contentof`:
+                        const it = symbols[value];
+                        const id = it[`@id`];
+                        if (typeof id === `undefined`) {
+                            throw Error(`Element '${it} not found`);
+                        }
+                        output = document.getElementById(id).innerHTML;
                         mod = true;
                         changed = true;
                         break;
@@ -28,15 +44,22 @@
                         break;
                 }
             }
+        } else if (Array.isArray(input)) {
+            for (const value of input) {
+                output = Webson.expand(element, value, symbols);
+            }
+            mod = true;
+            changed = true;
         } else {
+            // Expand all system and user-defined values
             while (mod) {
                 mod = false;
-                re = /(?:\#|\$)[a-zA-Z0-9_.]*/g;
+                re = /(?:\#|\$)[a-zA-Z0-9_.?]*/g;
                 while ((values = re.exec(output)) !== null) {
                     let item = values[0];
                     switch (item[0]) {
                         case `#`:
-                            // Evaluate system values
+                            // Expand system values
                             switch (item) {
                                 case `#element_width`:
                                     output = output.replace(item, element.offsetWidth);
@@ -64,20 +87,32 @@
                             }
                             break;
                         case `$`:
+                            // Expand user-defined values
                             let value = item;
                             const val = symbols[item];
                             if (Array.isArray(val)) {
                                 output = val;
                             } else {
                                 value = Webson.expand(element, val, symbols);
-                                output = output.replace(item, value);
+                                if (value === `undefined`) {
+                                    output = val;
+                                } else {
+                                    if (Array.isArray(output)) {
+                                        for (let n = 0; n < output.length; n++) {
+                                            output[n] = output[n].replace(item, value);
+                                        }
+                                    } else {
+                                        output = output.replace(item, value);
+                                    }
+                                    mod = true;
+                                    changed = true;
+                                }
                             }
-                            mod = true;
-                            changed = true;
                             break;
                         default:
                             break;
                     }
+                    break;
                 }
             }
         }
@@ -185,6 +220,9 @@
                 case `#element`:
                     break;
                 case `#content`:
+                    if (symbols[`#debug`] >= 2) {
+                        console.log(`#content: ${value}`);
+                    }
                     // Handle the content of the element
                     const val = Webson.expand(element, value, symbols);
                     if (symbols[`#debug`] >= 2) {
@@ -217,27 +255,7 @@
                                 symbols[`#target`] = value[item];
                                 break;
                             case `#steps`:
-                                const stepspec = value[item];
-                                let name;
-                                for (let stepitem in stepspec) {
-                                    switch (stepitem) {
-                                        case `#arraysize`:
-                                            name = stepspec[stepitem];
-                                            symbols[`#steps`] = symbols[name].length;
-                                            break;
-                                        case `#contentof`:
-                                            name = stepspec[stepitem];
-                                            const it = symbols[name];
-                                            const id = it[`@id`];
-                                            if (typeof id !== `undefined`) {
-                                                symbols[`#steps`] =
-                                                    document.getElementById(id).innerHTML;
-                                            }
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                }
+                                symbols[`#steps`] = Webson.expand(element, value[item], symbols);
                                 break;
                         }
                     }
@@ -309,8 +327,8 @@
                         }
                     } else if (key[0] === `$`) {
                         // Handle user variables
-                        const val = Webson.expand(element, value, symbols);
-                        symbols[key] = val;
+                        const val = symbols[key];
+                        symbols[key] = Webson.expand(element, value, symbols);
                         if (symbols[`#debug`] >= 2) {
                             console.log(`Variable ${key}: ${JSON.stringify(value,0,0)} -> ${val}`);
                         }
@@ -338,15 +356,24 @@
         }
     }, 
     
-    // Render a script into a given container
-    render: (parent, name, script) => {
-        Webson.parent = parent;
-        Webson.name = name;
-        Webson.script = JSON.parse(script);
-        Webson.build(parent, name, Webson.script, {
-            "#debug": 0,
-            "#state": "default"
-        });
+    // Render a script into a given container.
+    render: (parent, name, script, args = null) => {
+        if (args === null) {
+            // This is called to set up the system
+            Webson.parent = parent;
+            Webson.name = name;
+            Webson.script = JSON.parse(script);
+            args = {};
+            args[`#debug`] = 0;
+            args[`#state`] = `default`;
+            Webson.build(parent, name, Webson.script, args);
+        } else {
+            // This is called to insert an item into the existing DOM
+            args = JSON.parse(args);
+            args[`#debug`] = 0;
+            args[`#state`] = `default`;
+            Webson.build(parent, name, JSON.parse(script), args);
+        }
     }
 };
 
@@ -366,12 +393,20 @@ const EasyCoder_Webson = {
                     const parentRecord = compiler.getSymbolRecord();
                     if (parentRecord.extra === `dom`) {
                         compiler.next();
+                        let args = null;
+                        if (compiler.tokenIs(`with`)) {
+                            if (compiler.nextIsSymbol()) {
+                                args = compiler.getToken();
+                                compiler.next();
+                            }
+                        }
                         compiler.addCommand({
                             domain: `webson`,
                             keyword: `render`,
                             lino,
                             parent: parentRecord.name,
-                            script
+                            script,
+                            args
                         });
                         return true;
                     }
@@ -385,7 +420,12 @@ const EasyCoder_Webson = {
 			const parent = program.getSymbolRecord(command.parent);
             const element = parent.element[parent.index];
             const script = program.getValue(command.script);
-            Webson.render(element, `main`, script);
+            let args = command.args;
+            if (args != null) {
+                const record = program.getSymbolRecord(args);
+                args = record.value[record.index].content;
+            }
+            Webson.render(element, `main`, script, args);
 			return command.pc + 1;
 		}
 	},

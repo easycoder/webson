@@ -1,4 +1,5 @@
 {
+    "#element": "div",
     "#": ["$Buttons", "$Left"],
     
     "$Buttons": {
@@ -73,7 +74,8 @@
             "@id": "ImportPanel",
             "display": "none",
             "width": "100%",
-            "height": "20em"
+            "height": "20em",
+            "overflow-x": "scroll"
         },
         
         "$Parse": {
@@ -90,8 +92,7 @@
             "@id": "left",
             "display": "flex",
             "flex-direction": "row",
-            "overflow-x": "scroll",
-            "background": "yellow"
+            "overflow-x": "scroll"
         }
     }
 }
