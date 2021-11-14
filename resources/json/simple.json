@@ -1,5 +1,4 @@
 {
-    "#debug": 2,
     "width": "50%",
     "height": "50%",
     "display": "flex",
@@ -8,7 +7,6 @@
     
     "$Top": {
         "#element": "div",
-        "@id": "top",
         "height": "20%",
         "background": "cyan"
     },

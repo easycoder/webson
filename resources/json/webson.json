@@ -5,13 +5,14 @@
     "#": ["$Header", "$Main"],
     
     "$Header": {
+        "#doc": "The title bar",
         "#element": "div",
         "width": "100%",
-        "height": "auto",
         "margin-bottom": "0.5em",
         "#": "$Inner",
         
         "$Inner": {
+        "#doc": "The inner panel for the title bar",
             "#element": "div",
             "border": "1px solid #337fda",
             "padding": "0.2em",
@@ -24,6 +25,7 @@
     },
     
     "$Main": {
+        "#doc": "The main lower panel",
         "#element": "div",
         "width": "100%",
         "flex": 1,
@@ -32,6 +34,7 @@
         "#": ["$Left", "$Gap", "$Right"],
     
         "$Left": {
+            "#doc": "The left-hand panel",
             "#element": "div",
             "display": "inline-block",
             "flex": 1,
@@ -52,6 +55,7 @@
         },
         
         "$Right": {
+            "#doc": "The right-hand panel",
             "#element": "div",
             "display": "inline-block",
             "flex": 1,

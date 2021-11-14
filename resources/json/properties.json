@@ -1,0 +1,29 @@
+{
+    "#doc": "properties.json",
+    "#element": "div",
+    "display": "flex",
+    "flex-direction": "column",
+    "width": "10em",
+    "background": "pink",
+
+    "#repeat": {
+        "#doc": "This repeats an item vertically",
+        "#target": "$Name",
+        "#steps": {
+            "#arraysize": "$Properties"
+        }
+    },
+    
+    "$Name": {
+        "#element": "button",
+        "@type": "button",
+        "@id": "0-#step",
+        "flex": 1,
+        "width": "100%",
+        "margin-bottom": "0.25em",
+        "#content": {
+            "#select": "$Properties",
+            "#index": "#step"
+        }
+    }
+}

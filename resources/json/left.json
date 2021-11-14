@@ -57,16 +57,41 @@
     
     "$Left": {
         "#element": "div",
+        "width": "100%",
         "margin-top": "0.5em",
         
-        "#": "$Structure",
+        "#": "$Inner",
         
-        "$Structure": {
+        "$Inner": {
+            "#element": "div",
+            "width": "100%",
+            "#": ["$Import", "$Parse", "$Properties"]
+        },
+    
+        "$Import": {
+            "#element": "textarea",
+            "@id": "ImportPanel",
+            "display": "none",
+            "width": "100%",
+            "height": "20em"
+        },
+        
+        "$Parse": {
+            "#element": "button",
+            "@id": "Parse",
+            "@type": "button",
+            "#content": "Parse",
+            "display": "none",
+            "width": "100%"
+        },
+        
+        "$Properties": {
             "#element": "div",
             "@id": "left",
-            "width": "100%",
-            "#include": "resources/json/structure.json"
+            "display": "flex",
+            "flex-direction": "row",
+            "overflow-x": "scroll",
+            "background": "yellow"
         }
-        
     }
 }
